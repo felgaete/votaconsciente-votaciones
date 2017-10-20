@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Votaconsciente\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use Votaconsciente\User;
+use Votaconsciente\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -58,7 +58,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \Votaconsciente\User
      */
     protected function create(array $data)
     {

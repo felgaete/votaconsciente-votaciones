@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Votaconsciente\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
