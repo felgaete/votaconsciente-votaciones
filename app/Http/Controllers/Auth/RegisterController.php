@@ -5,7 +5,7 @@ namespace Votaconsciente\Http\Controllers\Auth;
 use Votaconsciente\User;
 use Votaconsciente\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Bestomomo\LaravelEmailConfirmation\Traits\RegistersUsers;
 
 class RegisterController extends Controller
 {

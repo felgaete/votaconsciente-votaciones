@@ -3,7 +3,7 @@
 namespace Votaconsciente\Http\Controllers\Auth;
 
 use Votaconsciente\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Bestmomo\LaravelEmailConfirmation\Traits\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
