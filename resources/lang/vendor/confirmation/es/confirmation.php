@@ -4,7 +4,7 @@ return [
     'email-title' => 'Confirmación de Email',
     'email-intro'=> 'Para confirmar tu correo, haz click en el botón',
     'email-button' => 'Confirmación',
-    'message' => 'Gracias por registrarte. Por favor revisa tu correo',
+    'message' => 'Gracias por registrarte. Por favor revisa tu correo para confirmar tu cuenta.',
     'success' => 'Has confirmado tu correo. Ahora puedes ingresar.',
     'again' => 'Debes confirmar tu correo antes de acceder al sitio. ' .
                 '<br>Si no has recibido el correo de confirmación, por favor revisa tu bandeja de spam.'.
