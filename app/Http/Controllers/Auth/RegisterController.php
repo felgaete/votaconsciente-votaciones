@@ -5,7 +5,7 @@ namespace Votaconsciente\Http\Controllers\Auth;
 use Votaconsciente\User;
 use Votaconsciente\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Bestomomo\LaravelEmailConfirmation\Traits\RegistersUsers;
+use Bestmomo\LaravelEmailConfirmation\Traits\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -51,6 +51,13 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+          'name.required' => 'Debes ingresar un nombre',
+          'email.required' => 'Debes ingresar un correo electrónico válido',
+          'email.email' => 'Debes ingresar un correo electrónico válido',
+          'email.unique' => 'El correo electrónico ya se encuentra utilizado',
+          'password.required' => 'Debes ingresar una contraseña',
+          'password.confirmed' => 'Las contraseñas ingresadas no coinciden'
         ]);
     }
 
