@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/votar';
 
     /**
      * Create a new controller instance.
@@ -44,7 +44,7 @@ class LoginController extends Controller
           'password' => 'required|string',
       ], [
         $this->username(). '.required' => 'Debes ingresar un correo elecrtónico',
-        'password.required' => 'Debes ingresar una contraseña' 
+        'password.required' => 'Debes ingresar una contraseña'
       ]);
     }
 }

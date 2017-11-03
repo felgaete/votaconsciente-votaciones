@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/votar', 'VotacionController@index')->name('votar');
+Route::get('/habilitar', 'VotacionController@habilitar')->name('habilitar');
+
+Route::middleware(['auth', 'auth.admin'])->group(base_path('routes/admin.php'));

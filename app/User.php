@@ -30,6 +30,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'confirmed'
     ];
+
+    public function votante()
+    {
+        return $this->belongsTo(Votante::class);
+    }
+
 }
