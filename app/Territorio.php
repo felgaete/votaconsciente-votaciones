@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Territorio extends Model
 {
+
+    protected $fillable = ['nombre'];
+
     public function circunscripciones()
     {
         return $this->belongsToMany(Circunscripcion::class);
