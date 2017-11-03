@@ -52,6 +52,16 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @if(!Auth::user()->votante)
+                                    <li>
+                                      <a href="{{ route('habilitar') }}">Habilitar voto</a>
+                                    </li>
+                                    @endif
+                                    @if(Auth::user()->is_admin)
+                                    <li>
+                                      <a href="{{route('admin-index')}}">Administracion</a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -70,6 +80,25 @@
                 </div>
             </div>
         </nav>
+        @auth
+        @if(!Auth::user()->votante)
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="alert alert-warning " role="alert">
+                <h4 class="alert-heading">Atención!</h4>
+                <p>
+                  <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+                  <span class="sr-only"></span>
+                  Para permitir ingresar tu voto, primero tienes que habilitarte como votante,
+                  puedes hacerlo desde <a class="alert-link" href="{{route('habilitar')}}">aquí</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endif
+        @endauth
 
         @yield('content')
     </div>
