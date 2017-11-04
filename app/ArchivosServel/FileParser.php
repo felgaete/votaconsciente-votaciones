@@ -41,6 +41,11 @@ abstract class FileParser
 
     public abstract function save();
 
+    public function getParser($model)
+    {
+        return $this->parsers[$model] ?: null;
+    }
+
     public function adds($model)
     {
         return $this->models['n'][$model];

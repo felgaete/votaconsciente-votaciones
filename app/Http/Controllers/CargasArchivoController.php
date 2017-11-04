@@ -11,6 +11,9 @@ use Votaconsciente\ArchivosServel\CandidaturasParser;
 use Votaconsciente\Circunscripcion;
 use Votaconsciente\Votante;
 use Votaconsciente\Territorio;
+use Votaconsciente\Eleccion;
+use Votaconsciente\Candidato;
+use Votaconsciente\Votacion;
 
 class CargasArchivoController extends Controller
 {
@@ -70,14 +73,12 @@ class CargasArchivoController extends Controller
         return back()->with(['message' => 'Archivo cargado con éxito.']);
     }
 
-    protected function parse(ServelArchivo $archivo)
+    protected function getParser(ServelArchivo $archivo)
     {
         if($archivo->type == ServelArchivo::PADRON_ELECTORAL_TYPE){
             $parser = new PadronElectoralParser();
-            $parser->parse($archivo);
         }else{
             $parser = new CandidaturasParser();
-            $parser->parse($archivo);
         }
         return $parser;
     }
@@ -85,7 +86,8 @@ class CargasArchivoController extends Controller
     public function procesar($archivoId)
     {
         $archivo = ServelArchivo::findOrFail($archivoId);
-        $parser = $this->parse($archivo);
+        $parser = $this->getParser($archivo);
+        $parser->parse($archivo);
         $view_data = [];
         if($archivo->type == ServelArchivo::PADRON_ELECTORAL_TYPE){
             $circunscripciones_nuevas = $parser->adds(Circunscripcion::class);
@@ -98,7 +100,18 @@ class CargasArchivoController extends Controller
             );
         }else{
             $territorios_nuevos = $parser->adds(Territorio::class);
-            $view_data = compact('archivo', 'territorios_nuevos');
+            $territorios_existentes = $parser->exists(Territorio::class);
+            $elecciones_nuevas = $parser->adds(Eleccion::class);
+            $elecciones_existentes = $parser->exists(Eleccion::class);
+            $candidatos_nuevos = $parser->adds(Candidato::class);
+            $candidatos_existentes = $parser->exists(Candidato::class);
+            $votaciones = Votacion::all();
+            $view_data = compact(
+                'archivo', 'territorios_nuevos', 'territorios_existentes',
+                'elecciones_nuevas', 'elecciones_existentes',
+                'candidatos_nuevos', 'candidatos_existentes',
+                'votaciones'
+            );
         }
 
         return view('admin.cargas.procesar', $view_data);
@@ -109,7 +122,16 @@ class CargasArchivoController extends Controller
         if($id == $request->archivo)
         {
             $archivo = ServelArchivo::findOrFail($id);
-            $parser = $this->parse($archivo);
+            $parser = $this->getParser($archivo);
+            if($archivo->type == ServelArchivo::CANDIDATURAS_TYPE){
+                $votacion = Votacion::firstOrCreate(
+                    ['id' => $request->votacion_id], ['nombre' => $request->votacion]
+                );
+                $parser->getParser(Eleccion::class)->setCreatedCallback(function($eleccion) use($votacion){
+                    $eleccion->votacion()->associate($votacion);
+                });
+            }
+            $parser->parse($archivo);
             $parser->save();
         }
 

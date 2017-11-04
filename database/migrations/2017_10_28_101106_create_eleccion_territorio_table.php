@@ -16,7 +16,6 @@ class CreateEleccionTerritorioTable extends Migration
         Schema::create('eleccion_territorio', function (Blueprint $table) {
             $table->integer('eleccion_id')->unsigned();
             $table->integer('territorio_id')->unsigned();
-            $table->timestamps();
             $table->primary(['eleccion_id', 'territorio_id'], 'eleccion_territorio_id');
             $table->foreign('eleccion_id')->references('id')->on('elecciones');
             $table->foreign('territorio_id')->references('id')->on('territorios');

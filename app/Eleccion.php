@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Eleccion extends Model
 {
 
+    protected $table = 'elecciones';
+    
+    protected $fillable = ['tipo'];
+
     public function votacion()
     {
         return $this->belongsTo(Votacion::class);
@@ -21,3 +25,5 @@ class Eleccion extends Model
     {
         return $this->hasMany(EleccionCandidado::class);
     }
+
+}

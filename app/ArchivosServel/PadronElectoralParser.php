@@ -29,9 +29,8 @@ class PadronElectoralParser extends FileParser
         //un index circunscripcion_id que contiene el nombre para asociar al modelo
         return function($votante, $attrs = []){
             if($this->circunscripciones == null){
-                $this->circunscripciones = $this->adds(Circunscripcion::class)->concat(
-                    $this->exists(Circunscripcion::class)
-                );
+                $this->circunscripciones = $this->adds(Circunscripcion::class)
+                    ->concat($this->exists(Circunscripcion::class));
             }
             $votante->circunscripcion()->associate($this->circunscripciones->first(
                 function($circunscripcion) use($votante, $attrs){

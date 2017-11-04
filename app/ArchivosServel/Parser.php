@@ -153,7 +153,7 @@ class Parser
 
     /**
     * Diferencia entre la tabla fuente con la tabla del modelo
-    * a partir de los
+    * a partir de los atributos de comparacion
     * @see https://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_orig.jpg
     */
     protected function diferencia(ServelArchivo $archivo)
