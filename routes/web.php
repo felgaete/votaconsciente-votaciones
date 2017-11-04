@@ -11,13 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/votar', 'VotacionController@index')->name('votar');
+Route::get('/', 'VotacionController@index')->name('inicio');
+Route::get('/votar', 'VotacionController@votar')->name('votar');
 Route::get('/habilitar', 'VotacionController@habilitar')->name('habilitar');
 
 Route::middleware(['auth', 'auth.admin'])->group(base_path('routes/admin.php'));
