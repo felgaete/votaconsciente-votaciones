@@ -28,14 +28,21 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav mr-auto">
-                    &nbsp;
+                    @auth
+                    <li class="nav-item {{isset($activo) && $activo == 'votar' ? 'active' : ''}}">
+                        <a href="{{route('votar')}}" class="nav-link">Votar</a>
+                    </li>
+                    <li class="nav-item {{isset($activo) && $activo == 'candidatos' ? 'active' : ''}}">
+                        <a href="#" class="nav-link">Candidatos</a>
+                    </li>
+                    @endauth
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav">
                     <!-- Authentication Links -->
                     @guest
-                    <li><a href="{{ route('login') }}">Ingresar</a></li>
-                    <li><a href="{{ route('register') }}">Registrarse</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}">Ingresar</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
                     @else
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

@@ -16,5 +16,7 @@ Auth::routes();
 Route::get('/', 'VotacionController@index')->name('inicio');
 Route::get('/votar', 'VotacionController@votar')->name('votar');
 Route::get('/habilitar', 'VotacionController@habilitar')->name('habilitar');
+Route::post('/habilitar', 'VotacionController@postHabilitar')->name('post-habilitar');
+Route::get('/votar/eleccion/{id}', 'VotacionController@votar')->name('votar-eleccion');
 
 Route::middleware(['auth', 'auth.admin'])->group(base_path('routes/admin.php'));
