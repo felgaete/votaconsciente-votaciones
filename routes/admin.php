@@ -8,15 +8,25 @@
 | Rutas para la administracion de los modelos del sitio
 |
 */
-Route::get('/admin', 'AdminController@index')->name('admin-index');
-Route::get('/admin/votaciones', 'AdminController@votaciones')->name('admin-votaciones');
-Route::get('/admin/elecciones', 'AdminController@elecciones')->name('admin-elecciones');
-Route::get('/admin/candidatos', 'AdminController@candidatos')->name('admin-candidatos');
-Route::get('/admin/circunscripciones', 'AdminController@circunscripciones')->name('admin-circunscripciones');
-Route::get('/admin/territorios', 'AdminController@territorios')->name('admin-territorios');
-Route::get('/admin/cargas', 'CargasArchivoController@index')->name('admin-cargas');
-Route::get('/admin/cargas/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
-Route::post('/admin/cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
-Route::post('/admin/cargas/padron-electoral', 'CargasArchivoController@cargaPadronElectoral')->name('admin-carga-padron');
-Route::post('/admin/cargas/candidaturas', 'CargasArchivoController@cargaCandidaturas')->name('admin-carga-candidaturas');
-Route::post('/admin/territorios/add-circunscripcion', 'AdminController@addCircunscripcionATerritorio')->name('admin-territorio-add-circunscripcion');
+Route::get('/', 'AdminController@index')->name('admin-index');
+Route::get('votaciones', 'AdminController@votaciones')->name('admin-votaciones');
+Route::get('elecciones', 'AdminController@elecciones')->name('admin-elecciones');
+Route::get('candidatos', 'AdminController@candidatos')->name('admin-candidatos');
+Route::get('territorios', 'AdminController@territorios')->name('admin-territorios');
+Route::get('cargas', 'CargasArchivoController@index')->name('admin-cargas');
+Route::get('cargas/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
+Route::post('cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
+Route::post('cargas/padron-electoral', 'CargasArchivoController@cargaPadronElectoral')->name('admin-carga-padron');
+Route::post('cargas/candidaturas', 'CargasArchivoController@cargaCandidaturas')->name('admin-carga-candidaturas');
+Route::post('territorios/add-circunscripcion', 'AdminController@addCircunscripcionATerritorio')->name('admin-territorio-add-circunscripcion');
+
+/*
+* Circunscripciones
+*/
+Route::prefix('circunscripciones')->group(function(){
+    Route::get('/', 'CircunscripcionController@listView')->name('admin-circunscripciones');
+    Route::get('/{view}/{id?}', 'CircunscripcionController@view')->name('admin-circunscripciones-view');
+    Route::post('/add', 'CircunscripcionController@add')->name('admin-circunscripciones-postadd');
+    Route::post('/update/{id}', 'CircunscripcionController@update')->name('admin-circunscripciones-postupdate');
+    Route::post('/delete/{id}', 'CircunscripcionController@delete')->name('admin-circunscripciones-postdelete');
+});

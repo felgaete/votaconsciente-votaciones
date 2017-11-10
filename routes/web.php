@@ -19,4 +19,4 @@ Route::get('/habilitar', 'VotacionController@habilitar')->name('habilitar');
 Route::post('/habilitar', 'VotacionController@postHabilitar')->name('post-habilitar');
 Route::get('/votar/eleccion/{id}', 'VotacionController@votar')->name('votar-eleccion');
 
-Route::middleware(['auth', 'auth.admin'])->group(base_path('routes/admin.php'));
+Route::middleware(['auth', 'auth.admin'])->namespace('Admin')->prefix('admin')->group(base_path('routes/admin.php'));
