@@ -11,9 +11,9 @@ class TerritorioController extends ModelController
     public function __construct()
     {
         parent::__construct(Territorio::class);
-        $this->addView('list', 'admin.territorios.list');
-        $this->addView('add', 'admin.territorios.add');
-        $this->addView('update', 'admin.territorios.update', true);
+        $this->viewAdd('list', 'admin.territorios.list');
+        $this->viewAdd('add', 'admin.territorios.add');
+        $this->viewAdd('update', 'admin.territorios.update', true);
     }
 
     public function listView(Request $r, $view_data = null)

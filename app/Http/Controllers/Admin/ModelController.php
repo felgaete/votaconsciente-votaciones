@@ -15,7 +15,7 @@ abstract class ModelController extends Controller
         $this->model = $model;
     }
 
-    public function addView($name, $view, $required_id = false)
+    public function viewAdd($name, $view, $required_id = false)
     {
         $this->views[$name] = [
             'view' => $view,
@@ -32,7 +32,7 @@ abstract class ModelController extends Controller
         $view = $this->views[$section];
 
         if(method_exists($this, $section.'View')){
-            return $this->{$section}($r, $view);
+            return $this->{$section.'View'}($r, $view);
         }
 
         if($view['required_id'] && is_null($id)){
