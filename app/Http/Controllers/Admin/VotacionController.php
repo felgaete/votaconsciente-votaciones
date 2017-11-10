@@ -31,7 +31,7 @@ class VotacionController extends ModelController
     public function add(Request $r)
     {
         $this->validate($r, [
-            'nombre' => 'required|max:255|unique:candidatos.votaciones'
+            'nombre' => 'required|max:255|unique:votaciones,nombre'
         ], [
             'nombre.required' => 'Debes ingresar un nombre.',
             'nombre.max' => 'El nombre no debe superar los :max caracteres.',
@@ -40,16 +40,20 @@ class VotacionController extends ModelController
 
         $votacion = new Votacion;
         $votacion->nombre = $r->nombre;
+        if($r->has('principal')){
+            Votacion::query()->update(['principal' => false]);
+            $votacion->principal = true;
+        }
 
         $votacion->save();
 
-        return success();
+        return $this->success();
     }
 
     public function update(Request $r, $id)
     {
         $votacion = $this->validateExists($r, $id, [
-            'nombre' => 'required|max:255|unique:candidatos.votaciones'
+            'nombre' => 'required|max:255|unique:votaciones,nombre'
         ], [
             'nombre.required' => 'Debes ingresar un nombre.',
             'nombre.max' => 'El nombre no debe superar los :max caracteres.',
@@ -58,9 +62,14 @@ class VotacionController extends ModelController
 
         $votacion->nombre = $r->nombre;
 
+        if($r->has('principal')){
+            Votacion::query()->update(['principal' => false]);
+            $votacion->principal = true;
+        }
+
         $votacion->save();
 
-        return success();
+        return $this->success();
     }
 
     public function delete(Request $r, $id)
@@ -69,6 +78,6 @@ class VotacionController extends ModelController
 
         $votacion->delete();
 
-        return success();
+        return $this->success();
     }
 }
