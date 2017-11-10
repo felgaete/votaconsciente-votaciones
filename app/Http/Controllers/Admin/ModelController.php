@@ -59,7 +59,7 @@ abstract class ModelController extends Controller
             $items = $r->get('items', $items);
             return $query->paginate($items);
         }
-        return $query;
+        return $query->get();
     }
 
 }

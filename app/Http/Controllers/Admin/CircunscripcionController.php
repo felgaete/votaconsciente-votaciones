@@ -58,8 +58,7 @@ class CircunscripcionController extends ModelController
         if(is_null($view_data)){
             $view_data = $this->views['list'];
         }
-        $query = $this->pagination($r, Circunscripcion::query());
-        $circunscripciones = $query->get();
+        $circunscripciones = $this->pagination($r, Circunscripcion::query());
         return view($view_data['view'])->with(compact('circunscripciones'));
     }
 
