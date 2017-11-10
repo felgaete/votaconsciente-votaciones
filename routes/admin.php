@@ -11,13 +11,11 @@
 Route::get('/', 'AdminController@index')->name('admin-index');
 Route::get('votaciones', 'AdminController@votaciones')->name('admin-votaciones');
 Route::get('elecciones', 'AdminController@elecciones')->name('admin-elecciones');
-Route::get('candidatos', 'AdminController@candidatos')->name('admin-candidatos');
 Route::get('cargas', 'CargasArchivoController@index')->name('admin-cargas');
 Route::get('cargas/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
 Route::post('cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
 Route::post('cargas/padron-electoral', 'CargasArchivoController@cargaPadronElectoral')->name('admin-carga-padron');
 Route::post('cargas/candidaturas', 'CargasArchivoController@cargaCandidaturas')->name('admin-carga-candidaturas');
-Route::post('territorios/add-circunscripcion', 'AdminController@addCircunscripcionATerritorio')->name('admin-territorio-add-circunscripcion');
 
 /*
 * Circunscripciones
@@ -35,8 +33,19 @@ Route::prefix('circunscripciones')->group(function(){
 */
 Route::prefix('territorios')->group(function(){
     Route::get('/', 'TerritorioController@listView')->name('admin-territorios');
-    Route::get('/{view}/{$id?}', 'TerritorioController@view')->name('admin-territorios-view');
-    Route::post('/add', 'TerritorioController@add')->name('admin-circunscripciones-postadd');
-    Route::post('/update/{id}', 'TerritorioController@update')->name('admin-circunscripciones-postupdate');
-    Route::post('/delete/{id}', 'TerritorioController@delete')->name('admin-circunscripciones-postdelete');
+    Route::get('/{view}/{id?}', 'TerritorioController@view')->name('admin-territorios-view');
+    Route::post('/add', 'TerritorioController@add')->name('admin-territorios-postadd');
+    Route::post('/update/{id}', 'TerritorioController@update')->name('admin-territorios-postupdate');
+    Route::post('/delete/{id}', 'TerritorioController@delete')->name('admin-territorios-postdelete');
+});
+
+/*
+* Candidatos
+*/
+Route::prefix('candidatos')->group(function(){
+    Route::get('/', 'CandidatoController@listView')->name('admin-candidatos');
+    Route::get('/{view}/{id?}', 'CandidatoController@view')->name('admin-candidatos-view');
+    Route::post('/add', 'CandidatoController@add')->name('admin-candidatos-postadd');
+    Route::post('/update/{id}', 'CandidatoController@update')->name('admin-candidatos-postupdate');
+    Route::post('/delete/{id}', 'CandidatoController@delete')->name('admin-candidatos-postdelete');
 });
