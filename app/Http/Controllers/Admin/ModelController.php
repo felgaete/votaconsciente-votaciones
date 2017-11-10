@@ -12,7 +12,7 @@ abstract class ModelController extends Controller
 
     public function __construct($model = null)
     {
-        $this->model = null;
+        $this->model = $model;
     }
 
     public function addView($name, $view, $required_id = false)
@@ -35,7 +35,7 @@ abstract class ModelController extends Controller
             return $this->{$section}($r, $view);
         }
 
-        if($view['id_required'] && is_null($id)){
+        if($view['required_id'] && is_null($id)){
             return abort(404);
         }
 
@@ -60,6 +60,15 @@ abstract class ModelController extends Controller
             return $query->paginate($items);
         }
         return $query->get();
+    }
+
+    protected function validateExists(Request $r, $id,
+                                            $add_rules = [], $messages = [])
+    {
+        $this->validate($r, array_merge([
+            'id' => "required|integer|exists:".($this->model)::table()."|in:$circunscripcion_id"
+        ], $add_rules), $messages);
+        return ($this->model)::findOrFail($circunscripcion_id);
     }
 
 }

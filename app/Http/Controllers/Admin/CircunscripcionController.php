@@ -70,13 +70,4 @@ class CircunscripcionController extends ModelController
         return success();
     }
 
-    protected function validateExists(Request $r, $circunscripcion_id,
-                                            $add_rules = [], $messages = [])
-    {
-        $this->validate($r, array_merge([
-            'id' => "required|integer|exists:circunscripciones|in:$circunscripcion_id"
-        ], $add_rules), $messages);
-        return Circunscripcion::findOrFail($circunscripcion_id);
-    }
-
 }
