@@ -22,7 +22,7 @@ class CircunscripcionController extends ModelController
             'nombre' => 'required|max:255|unique:circunscripciones.circunscripcion'
         ],[
             'nombre.required' => 'Debes indicar un nombre.',
-            'nombre.max' => 'La cantidad de caracteres debe ser {max} maximo.',
+            'nombre.max' => 'La cantidad de caracteres debe ser :max maximo.',
             'nombre.unique' => 'El nombre ya existe.'
         ]);
 
