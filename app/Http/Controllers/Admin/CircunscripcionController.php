@@ -19,7 +19,7 @@ class CircunscripcionController extends ModelController
     public function add(Request $r)
     {
         $this->validate($r, [
-            'nombre' => 'required|max:255|unique:circunscripciones.circunscripcion'
+            'nombre' => 'required|max:255|unique:circunscripciones,circunscripcion'
         ],[
             'nombre.required' => 'Debes indicar un nombre.',
             'nombre.max' => 'La cantidad de caracteres debe ser :max maximo.',
@@ -31,14 +31,14 @@ class CircunscripcionController extends ModelController
 
         $circunscripcion->save();
 
-        return success();
+        return $this->success();
 
     }
 
     public function update(Request $r, $circunscripcion_id)
     {
         $circunscripcion = $this->validateExists($r, $circunscripcion_id, [
-            'nombre' => 'required|max:255|unique:circunscripciones.circunscripcion',
+            'nombre' => 'required|max:255|unique:circunscripciones,circunscripcion',
             'territorios' => 'array'
         ], [
             'nombre' => 'El nombre ya existe.'
@@ -50,7 +50,7 @@ class CircunscripcionController extends ModelController
             $circunscripcion->territorios()->sync($r->territorios);
         }
 
-        return success();
+        return $this->success();
     }
 
     public function listView(Request $r, $view_data = null)
@@ -67,7 +67,7 @@ class CircunscripcionController extends ModelController
         $circunscripcion = $this->validateExists($r, $circunscripcion_id);
         $circunscripcion->delete();
 
-        return success();
+        return $this->success();
     }
 
 }

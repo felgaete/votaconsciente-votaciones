@@ -29,7 +29,7 @@ class TerritorioController extends ModelController
     public function add(Request $r)
     {
         $this->validate($r, [
-            'nombre' => 'required|max:255|unique:territorios.nombre'
+            'nombre' => 'required|max:255|unique:territorios,nombre'
         ],[
             'nombre.required' => 'Debes ingresar un nombre.',
             'nombre.max' => 'La cantidad de caracteres debe ser :max maximo.',
@@ -41,13 +41,13 @@ class TerritorioController extends ModelController
 
         $territorio->save();
 
-        return success();
+        return $this->success();
     }
 
     public function update(Request $r, $id)
     {
         $territorio = $this->validateExists($r, $id, [
-            'nombre' => 'required|max:255|unique:territorios.nombre',
+            'nombre' => 'required|max:255|unique:territorios,nombre',
             'circunscripciones' => 'array'
         ]);
 
@@ -58,7 +58,7 @@ class TerritorioController extends ModelController
             $territorio->circunscripciones()->sync($r->circunscripciones);
         }
 
-        return success();
+        return $this->success();
 
     }
 
@@ -67,7 +67,7 @@ class TerritorioController extends ModelController
         $territorio = $this->validateExists($r, $id);
         $territorio->delete();
 
-        return success();
+        return $this->success();
     }
 
 }

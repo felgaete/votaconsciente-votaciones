@@ -4,6 +4,7 @@ namespace Votaconsciente\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Votaconsciente\Eleccion;
+use Votaconsciente\Votacion;
 
 class EleccionController extends ModelController
 {
@@ -30,7 +31,7 @@ class EleccionController extends ModelController
     {
         $this->validate($r, [
             'nombre' => 'required|max:255',
-            'votacion' => 'required|exists:votaciones'
+            'votacion' => 'required|exists:votaciones,id'
         ], [
             'nombre.required' => 'Debes ingresar un nombre.',
             'nombre.max' => 'El nombre no debe superar los :max caracteres.',
@@ -44,14 +45,14 @@ class EleccionController extends ModelController
 
         $eleccion->save();
 
-        return success();
+        return $this->success();
     }
 
     public function update(Request $r, $id)
     {
         $eleccion = $this->validateExists($r, $id, [
             'nombre' => 'required|max:255',
-            'votacion' => 'required|exists:votaciones'
+            'votacion' => 'required|exists:votaciones,id'
         ], [
             'nombre.required' => 'Debes ingresar un nombre.',
             'nombre.max' => 'El nombre no debe superar los :max caracteres.',
@@ -65,7 +66,7 @@ class EleccionController extends ModelController
 
         $candidato->save();
 
-        return success();
+        return $this->success();
     }
 
     public function delete(Request $r, $id)
@@ -74,6 +75,6 @@ class EleccionController extends ModelController
 
         $candidato->delete();
 
-        return success();
+        return $this->success();
     }
 }

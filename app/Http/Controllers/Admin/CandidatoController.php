@@ -31,15 +31,13 @@ class CandidatoController extends ModelController
     public function add(Request $r)
     {
         $this->validate($r, [
-            'nombre' => 'required|max:255|unique:candidatos.nombre',
-            'partido_politico' => 'max:255',
-            'consciente' => 'required|boolean'
+            'nombre' => 'required|max:255|unique:candidatos,nombre',
+            'partido_politico' => 'max:255'
         ], [
             'nombre.required' => 'Debes ingresar un nombre.',
             'nombre.max' => 'El nombre no debe superar los :max caracteres.',
             'nombre.unique' => 'El nombre ya existe.',
-            'partido_politico' => 'El partido politico no debe superar los :max caracteres.',
-            'consciente.required' => 'Debes indicar si el candidato es un candidato consciente.'
+            'partido_politico' => 'El partido politico no debe superar los :max caracteres.'
         ]);
 
         $candidato = new Candidato;
@@ -49,7 +47,7 @@ class CandidatoController extends ModelController
 
         $candidato->save();
 
-        return success();
+        return $this->success();
     }
 
     public function update(Request $r, $id)
@@ -68,11 +66,11 @@ class CandidatoController extends ModelController
 
         $candidato->nombre = $r->nombre;
         $candidato->partido_politico = $r->partido_politico;
-        $candidato->candidato_consciente = $r->consciente == '1';
+        $candidato->candidato_consciente = $r->has('consciente');
 
         $candidato->save();
 
-        return success();
+        return $this->success();
     }
 
     public function delete(Request $r, $id)
@@ -81,7 +79,7 @@ class CandidatoController extends ModelController
 
         $candidato->delete();
 
-        return success();
+        return $this->success();
     }
 
 }
