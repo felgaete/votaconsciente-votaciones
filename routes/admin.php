@@ -10,7 +10,6 @@
 */
 Route::get('/', 'AdminController@index')->name('admin-index');
 Route::get('votaciones', 'AdminController@votaciones')->name('admin-votaciones');
-Route::get('elecciones', 'AdminController@elecciones')->name('admin-elecciones');
 Route::get('cargas', 'CargasArchivoController@index')->name('admin-cargas');
 Route::get('cargas/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
 Route::post('cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
@@ -48,4 +47,15 @@ Route::prefix('candidatos')->group(function(){
     Route::post('/add', 'CandidatoController@add')->name('admin-candidatos-postadd');
     Route::post('/update/{id}', 'CandidatoController@update')->name('admin-candidatos-postupdate');
     Route::post('/delete/{id}', 'CandidatoController@delete')->name('admin-candidatos-postdelete');
+});
+
+/*
+* Elecciones
+*/
+Route::prefix('elecciones')->group(function(){
+    Route::get('/', 'EleccionController@listView')->name('admin-elecciones');
+    Route::get('/{view}/{id?}', 'EleccionController@view')->name('admin-elecciones-view');
+    Route::post('/add', 'EleccionController@add')->name('admin-elecciones-postadd');
+    Route::post('/update/{id}', 'EleccionController@update')->name('admin-elecciones-postupdate');
+    Route::post('/delete/{id}', 'EleccionController@delete')->name('admin-elecciones-postdelete');
 });
