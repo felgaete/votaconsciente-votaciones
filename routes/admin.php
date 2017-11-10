@@ -10,7 +10,7 @@
 */
 Route::get('/', function(){
     return view('admin.index');
-});
+})->name('admin-index');
 
 Route::prefix('cargas')->group(function(){
     Route::get('/', 'CargasArchivoController@index')->name('admin-cargas');
