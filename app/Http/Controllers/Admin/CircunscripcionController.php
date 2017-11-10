@@ -13,7 +13,7 @@ class CircunscripcionController extends ModelController
         parent::__construct(Circunscripcion::class);
         $this->addView('list', 'admin.circunscripciones.list');
         $this->addView('add', 'admin.circunscripciones.add');
-        $this->addView('update', 'admin.circunscripciones.update');
+        $this->addView('update', 'admin.circunscripciones.update', true);
     }
 
     public function add(Request $r)
