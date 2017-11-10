@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-3">
     <div class="mx-auto w-50">
-        <form novalidate method="post" action="{{route('post-habilitar')}}">
+        <form novalidate method="post" action="{{route('votante-habilitar')}}">
             {{csrf_field()}}
             <div class="form-group">
                 <label for="ci">Rut</label>

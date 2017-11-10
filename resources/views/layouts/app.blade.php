@@ -30,7 +30,7 @@
                 <ul class="nav navbar-nav mr-auto">
                     @auth
                     <li class="nav-item {{isset($activo) && $activo == 'votar' ? 'active' : ''}}">
-                        <a href="{{route('votar')}}" class="nav-link">Votar</a>
+                        <a href="{{route('votacion-main')}}" class="nav-link">Votaciones</a>
                     </li>
                     <li class="nav-item {{isset($activo) && $activo == 'candidatos' ? 'active' : ''}}">
                         <a href="#" class="nav-link">Candidatos</a>
@@ -52,7 +52,7 @@
                         <ul class="dropdown-menu" role="menu">
                             @if(!Auth::user()->votante)
                             <li class="dropdown-item">
-                                <a href="{{ route('habilitar') }}">Habilitar voto</a>
+                                <a href="{{ route('votante-habilitar-view') }}">Habilitar voto</a>
                             </li>
                             @endif
                             @if(Auth::user()->is_admin)
@@ -89,7 +89,7 @@
                                 <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
                                 <span class="sr-only"></span>
                                 Para permitir ingresar tu voto, primero tienes que habilitarte como votante,
-                                puedes hacerlo desde <a class="alert-link" href="{{route('habilitar')}}">aquí</a>.
+                                puedes hacerlo desde <a class="alert-link" href="{{route('votante-habilitar')}}">aquí</a>.
                             </p>
                         </div>
                     </div>
