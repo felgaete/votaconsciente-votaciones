@@ -3,49 +3,17 @@
 namespace Votaconsciente\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Votaconsciente\Http\Controllers\Controller;
 use Votaconsciente\Circunscripcion;
 
-class CircunscripcionController extends Controller
+class CircunscripcionController extends ModelController
 {
 
-    private $views = [
-        'list' => [
-            'view' => 'admin.circunscripciones.list',
-            'id_required' => false
-        ],
-        'add' => [
-            'view' => 'admin.circunscripciones.add',
-            'id_required' => false
-        ],
-        'update' => [
-            'view' => 'admin.circunscripciones.update',
-            'id_required' => true
-        ]
-    ];
-
-    public function view(Request $r, $section, $id = null)
+    public function __construct()
     {
-        if(!array_key_exists($section, $this->views)){
-            return abort(404);
-        }
-
-        $view = $this->views[$section];
-
-        if(method_exists($this, $section.'View')){
-            return $this->{$section}($r, $view);
-        }
-
-        if($view['id_required'] && is_null($id)){
-            return abort(404);
-        }
-
-        $circunscripcion = null;
-        if($id){
-            $circunscripcion = Circunscripcion::findOrFail($id);
-        }
-
-        return view($view['view'])->with(compact('circunscripcion'));
+        parent::__construct(Circunscripcion::class);
+        $this->addView('list', 'admin.circunscripciones.list');
+        $this->addView('add', 'admin.circunscripciones.add');
+        $this->addView('update', 'admin.circunscripciones.update');
     }
 
     public function add(Request $r)
@@ -110,21 +78,6 @@ class CircunscripcionController extends Controller
             'id' => "required|integer|exists:circunscripciones|in:$circunscripcion_id"
         ], $add_rules), $messages);
         return Circunscripcion::findOrFail($circunscripcion_id);
-    }
-
-    protected function success()
-    {
-        return back()->with(['success' => true]);
-    }
-
-    protected function pagination(Request $r, $query, $items = 10)
-    {
-        if($r->has('paginate'))
-        {
-            $items = $r->get('items', $items);
-            return $query->paginate($items);
-        }
-        return $query;
     }
 
 }
