@@ -9,7 +9,6 @@
 |
 */
 Route::get('/', 'AdminController@index')->name('admin-index');
-Route::get('votaciones', 'AdminController@votaciones')->name('admin-votaciones');
 Route::get('cargas', 'CargasArchivoController@index')->name('admin-cargas');
 Route::get('cargas/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
 Route::post('cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
@@ -58,4 +57,15 @@ Route::prefix('elecciones')->group(function(){
     Route::post('/add', 'EleccionController@add')->name('admin-elecciones-postadd');
     Route::post('/update/{id}', 'EleccionController@update')->name('admin-elecciones-postupdate');
     Route::post('/delete/{id}', 'EleccionController@delete')->name('admin-elecciones-postdelete');
+});
+
+/*
+* Elecciones
+*/
+Route::prefix('votaciones')->group(function(){
+    Route::get('/', 'VotacionController@listView')->name('admin-votaciones');
+    Route::get('/{view}/{id?}', 'VotacionController@view')->name('admin-votaciones-view');
+    Route::post('/add', 'VotacionController@add')->name('admin-votaciones-postadd');
+    Route::post('/update/{id}', 'VotacionController@update')->name('admin-votaciones-postupdate');
+    Route::post('/delete/{id}', 'VotacionController@delete')->name('admin-votaciones-postdelete');
 });
