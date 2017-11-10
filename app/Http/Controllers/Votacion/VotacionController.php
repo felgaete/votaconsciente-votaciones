@@ -1,54 +1,40 @@
 <?php
 
-namespace Votaconsciente\Http\Controllers;
+namespace Votaconsciente\Http\Controllers\Votacion;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Votaconsciente\Http\Controllers\FrontController as Controller;
+use Votaconsciente\Votacion;
 use Votaconsciente\Eleccion;
-use Votaconsciente\Candidato;
 
 class VotacionController extends Controller
 {
 
-  public function __construct()
-  {
-    $this->middleware('auth');
-  }
+    public function principal()
+    {
+        $votacion = Votacion::where('principal', true)->first();
 
-  public function index()
-  {
-      return view('votacion.index');
-  }
+        return view('votaciones.main')->with(compact('votacion'));
+    }
 
-  public function votar($id = null)
-  {
-      $elecciones = Eleccion::all();
-      $eleccion = false;
-      if($id){
-          $eleccion = Eleccion::findOrFail($id);
-      }
-      $candidatos = Candidato::query();
-      if($eleccion){
-          $candidatos->whereHas('elecciones', function($qb) use($eleccion){
-              return $qb->where('eleccion_id', $eleccion->id);
-          });
-     };
-     $candidatos = $candidatos->get();
-     return view('votacion.votar', compact('elecciones', 'eleccion', 'candidatos'));
-  }
+    public function votacion(Request $r, $votacion_id)
+    {
+        $votacion = Votacion::findOrFail($votacion_id);
 
-  public function habilitar()
-  {
-    return view('votacion.habilitar');
-  }
+        return view('votaciones.votacion')->with(compact('votacion'));
+    }
 
-  public function postHabilitar(Request $r)
-  {
-      $resultado = Auth::user()->habilitarVoto($r->ci);
-      if($resultado){
-          return redirect()->route('votar')->with(['habilitado' => true]);
-      }
-      return redirect()->route('habilitar')->with(['habilitado' => false ]);
-  }
+    public function eleccion($votacion_id, $eleccion_id)
+    {
+        $eleccion = Eleccion::where('votacion_id', $votacion_id)
+            ->findOrFail($eleccion_id);
+        return view('votaciones.eleccion', compact('eleccion'));
+    }
+
+    public function votar(Request $r, $votacion_id, $eleccion_id)
+    {
+        
+    }
 
 }

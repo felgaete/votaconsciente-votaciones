@@ -13,10 +13,22 @@
 
 Auth::routes();
 
-Route::get('/', 'VotacionController@index')->name('inicio');
-Route::get('/votar', 'VotacionController@votar')->name('votar');
-Route::get('/habilitar', 'VotacionController@habilitar')->name('habilitar');
-Route::post('/habilitar', 'VotacionController@postHabilitar')->name('post-habilitar');
-Route::get('/votar/eleccion/{id}', 'VotacionController@votar')->name('votar-eleccion');
+Route::get('/', function(){
+    return view('welcome');
+});
+
+Route::prefix('votante')->namespace('Votante')->middleware(['auth'])->group(function(){
+    Route::get('/', 'VotanteController@edit')->name('votante-edit');
+    Route::post('/update', 'VotanteController@update')->name('votante-update');
+    Route::get('/habilitar', 'VotanteController@habilitarView')->name('votante-habilitar-view');
+    Route::post('/habilitar', 'VotanteController@habilitar')->name('votante-habilitar');
+});
+
+Route::prefix('votacion')->namespace('Votacion')->middleware(['auth', 'auth.votante'])->group(function(){
+    Route::get('/', 'VotacionController@principal')->name('votacion-main');
+    Route::get('/{votacion}', 'VotacionController@votacion')->name('votacion-view');
+    Route::get('/{votacion}/eleccion/{eleccion}', 'VotacionController@eleccion')->name('votacion-eleccion-view');
+    Route::post('/{votacion}/eleccion/{eleccion}/votar');
+});
 
 Route::middleware(['auth', 'auth.admin'])->namespace('Admin')->prefix('admin')->group(base_path('routes/admin.php'));
