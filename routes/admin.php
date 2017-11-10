@@ -8,12 +8,17 @@
 | Rutas para la administracion de los modelos del sitio
 |
 */
-Route::get('/', 'AdminController@index')->name('admin-index');
-Route::get('cargas', 'CargasArchivoController@index')->name('admin-cargas');
-Route::get('cargas/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
-Route::post('cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
-Route::post('cargas/padron-electoral', 'CargasArchivoController@cargaPadronElectoral')->name('admin-carga-padron');
-Route::post('cargas/candidaturas', 'CargasArchivoController@cargaCandidaturas')->name('admin-carga-candidaturas');
+Route::get('/', function(){
+    return view('admin.index');
+});
+
+Route::prefix('cargas')->group(function(){
+    Route::get('/', 'CargasArchivoController@index')->name('admin-cargas');
+    Route::get('/procesar/{id}', 'CargasArchivoController@procesar')->name('admin-procesar-archivo');
+    Route::post('/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
+    Route::post('/padron-electoral', 'CargasArchivoController@cargaPadronElectoral')->name('admin-carga-padron');
+    Route::post('/candidaturas', 'CargasArchivoController@cargaCandidaturas')->name('admin-carga-candidaturas');
+});
 
 /*
 * Circunscripciones
