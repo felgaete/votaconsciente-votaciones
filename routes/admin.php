@@ -19,3 +19,4 @@ Route::get('/admin/cargas/procesar/{id}', 'CargasArchivoController@procesar')->n
 Route::post('/admin/cargas/procesar/{id}', 'CargasArchivoController@confirmarProcesar')->name('admin-procesar-archivo-confirmar');
 Route::post('/admin/cargas/padron-electoral', 'CargasArchivoController@cargaPadronElectoral')->name('admin-carga-padron');
 Route::post('/admin/cargas/candidaturas', 'CargasArchivoController@cargaCandidaturas')->name('admin-carga-candidaturas');
+Route::post('/admin/territorios/add-circunscripcion', 'AdminController@addCircunscripcionATerritorio')->name('admin-territorio-add-circunscripcion');
