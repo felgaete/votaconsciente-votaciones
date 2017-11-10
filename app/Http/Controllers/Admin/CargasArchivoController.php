@@ -1,8 +1,9 @@
 <?php
 
-namespace Votaconsciente\Http\Controllers;
+namespace Votaconsciente\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Votaconsciente\Http\Controllers\Controller;
 use Votaconsciente\ServelArchivo;
 use Votaconsciente\Jobs\ProcessPadronElectoralFileJob;
 use Votaconsciente\Jobs\ProcessCandidaturasFileJob;
