@@ -66,7 +66,7 @@ abstract class ModelController extends Controller
                                             $add_rules = [], $messages = [])
     {
         $this->validate($r, array_merge([
-            'id' => "required|integer|exists:".($this->model)::table()."|in:$circunscripcion_id"
+            'id' => "required|integer|exists:".($this->model)::table()."|in:$id"
         ], $add_rules), $messages);
         return ($this->model)::findOrFail($circunscripcion_id);
     }
