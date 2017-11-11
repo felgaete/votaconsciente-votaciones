@@ -175,9 +175,12 @@
                             <div class="card">
                                 <div class="card-body">
                                     <ul class="list-unstyled">
-                                        @foreach($candidatos_nuevos->forPage(1, 10) as $c)
-                                        <li>
-                                            {{$c->nombre}} [{{$c->elecciones->first()->tipo}}]
+                                        @foreach($politicos_nuevos->forPage(1, 10) as $p)
+                                        <li class="mb-2">
+                                            {{$p->nombre}}<br>
+                                            <small>
+                                                CANDIDATURA {{$p->candidaturas->first()->eleccion->tipo}} {{$p->candidaturas->first()->territorio->nombre}}
+                                            </small>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -186,9 +189,12 @@
                             <div class="card">
                                 <div class="card-body">
                                     <ul class="list-unstyled">
-                                        @foreach($candidatos_existentes->forPage(1, 10) as $c)
-                                        <li>
-                                            {{$c->nombre}} [{{$c->elecciones->first()->tipo}}]
+                                        @foreach($politicos_existentes->forPage(1, 10) as $p)
+                                        <li class="mb-2">
+                                            {{$p->nombre}}<br>
+                                            <small>
+                                                CANDIDATURA {{$p->candidaturas->first()->eleccion->tipo}} {{$p->candidaturas->first()->territorio->nombre}}
+                                            </small>
                                         </li>
                                         @endforeach
                                     </ul>

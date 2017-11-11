@@ -13,7 +13,7 @@ use Votaconsciente\Circunscripcion;
 use Votaconsciente\Votante;
 use Votaconsciente\Territorio;
 use Votaconsciente\Eleccion;
-use Votaconsciente\Candidato;
+use Votaconsciente\Politico;
 use Votaconsciente\Votacion;
 
 class CargasArchivoController extends Controller
@@ -104,13 +104,13 @@ class CargasArchivoController extends Controller
             $territorios_existentes = $parser->exists(Territorio::class);
             $elecciones_nuevas = $parser->adds(Eleccion::class);
             $elecciones_existentes = $parser->exists(Eleccion::class);
-            $candidatos_nuevos = $parser->adds(Candidato::class);
-            $candidatos_existentes = $parser->exists(Candidato::class);
+            $politicos_nuevos = $parser->adds(Politico::class);
+            $politicos_existentes = $parser->exists(Politico::class);
             $votaciones = Votacion::all();
             $view_data = compact(
                 'archivo', 'territorios_nuevos', 'territorios_existentes',
                 'elecciones_nuevas', 'elecciones_existentes',
-                'candidatos_nuevos', 'candidatos_existentes',
+                'politicos_nuevos', 'politicos_existentes',
                 'votaciones'
             );
         }

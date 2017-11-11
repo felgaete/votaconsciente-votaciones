@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEleccionesCandidatosTable extends Migration
+class CreateTerritorioElectoralTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateEleccionesCandidatosTable extends Migration
      */
     public function up()
     {
-        Schema::create('elecciones_candidatos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('candidato_id')->unsigned();
+        Schema::create('territorio_electoral', function (Blueprint $table) {
             $table->integer('eleccion_id')->unsigned();
-            $table->unique(['candidato_id', 'eleccion_id']);
-            $table->foreign('candidato_id')->references('id')->on('candidatos');
+            $table->integer('territorio_id')->unsigned();
+            $table->primary(['eleccion_id', 'territorio_id'], 'eleccion_territorio_id');
             $table->foreign('eleccion_id')->references('id')->on('elecciones');
+            $table->foreign('territorio_id')->references('id')->on('territorios');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateEleccionesCandidatosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('elecciones_candidatos');
+        Schema::dropIfExists('territorio_electoral');
     }
 }

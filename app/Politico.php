@@ -4,14 +4,14 @@ namespace Votaconsciente;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Candidato extends Model
+class Politico extends Model
 {
 
     protected $fillable = ['nombre', 'partido_politico'];
 
-    public function elecciones()
+    public function candidaturas()
     {
-        return $this->belongsToMany(Eleccion::class, 'elecciones_candidatos');
+        return $this->hasMany(Candidatura::class);
     }
 
 }

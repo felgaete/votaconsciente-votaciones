@@ -15,12 +15,12 @@ class CreateVotosTable extends Migration
     {
         Schema::create('votos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('candidato_eleccion_id')->unsigned();
+            $table->integer('candidatura_id')->unsigned();
             $table->integer('votante_id')->unsigned();
             $table->integer('circunscripcion_id')->unsigned();
-            $table->unique(['candidato_eleccion_id', 'votante_id']);
             $table->timestamps();
-            $table->foreign('candidato_eleccion_id')->references('id')->on('elecciones_candidatos');
+            $table->unique(['candidatura_id', 'votante_id']);
+            $table->foreign('candidatura_id')->references('id')->on('candidaturas');
             $table->foreign('votante_id')->references('id')->on('votantes');
             $table->foreign('circunscripcion_id')->references('id')->on('circunscripciones');
         });

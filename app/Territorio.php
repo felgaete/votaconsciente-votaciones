@@ -16,6 +16,6 @@ class Territorio extends Model
 
     public function elecciones()
     {
-        return $this->belongsToMany(Eleccion::class);
+        return $this->belongsToMany(Eleccion::class, 'territorio_electoral');
     }
 }

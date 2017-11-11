@@ -8,7 +8,7 @@ class Eleccion extends Model
 {
 
     protected $table = 'elecciones';
-    
+
     protected $fillable = ['tipo'];
 
     public function votacion()
@@ -18,12 +18,7 @@ class Eleccion extends Model
 
     public function territorios()
     {
-        return $this->belongsToMany(Territorio::class);
-    }
-
-    public function eleccionesCandidatos()
-    {
-        return $this->hasMany(EleccionCandidado::class);
+        return $this->belongsToMany(Territorio::class, 'territorio_electoral');
     }
 
 }

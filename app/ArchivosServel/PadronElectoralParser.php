@@ -53,9 +53,6 @@ class PadronElectoralParser extends FileParser
             });
             $this->getUltimoArchivo()->update(['processed' => true]);
         });
-
-        return back();
-
     }
 
 }
