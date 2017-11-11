@@ -16,7 +16,7 @@ class VotacionController extends Controller
 
     public function principal()
     {
-        $votacion = Votacion::where('principal', true)->first();
+        $votacion = Votacion::where('principal', true)->with('elecciones')->first();
 
         return view('votaciones.main')->with(compact('votacion'));
     }
@@ -30,9 +30,13 @@ class VotacionController extends Controller
 
     public function eleccion($votacion_id, $eleccion_id)
     {
+        $votacion = Votacion::with(['elecciones' => function($builder) use($eleccion_id){
+            return $builder->where('id', '<>', $eleccion_id);
+        }])->findOrFail($votacion_id);
         $eleccion = Eleccion::where('votacion_id', $votacion_id)
+            ->with(['candidaturas.politico', 'candidaturas.territorio'])
             ->findOrFail($eleccion_id);
-        return view('votaciones.eleccion', compact('eleccion'));
+        return view('votaciones.eleccion', compact('eleccion', 'votacion'));
     }
 
     public function votar(Request $r)
