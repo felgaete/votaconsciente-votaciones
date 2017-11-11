@@ -13,7 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Votaconsciente\Model' => 'Votaconsciente\Policies\ModelPolicy',
+        'Votaconsciente\Candidatura' => 'Votaconsciente\Policies\CandidaturaPolicy',
+        'Votaconsciente\Voto' => 'Votaconsciente\Policies\VotoPolicy',
     ];
 
     /**
@@ -25,6 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('votar-territorio-electoral', 'Votaconsciente\Policies\TerritorioElectoralPolicy@votar');
     }
 }

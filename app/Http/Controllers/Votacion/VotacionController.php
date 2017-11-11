@@ -4,9 +4,12 @@ namespace Votaconsciente\Http\Controllers\Votacion;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Votaconsciente\Http\Controllers\FrontController as Controller;
 use Votaconsciente\Votacion;
 use Votaconsciente\Eleccion;
+use Votaconsciente\Candidatura;
+use Votaconsciente\Voto;
 
 class VotacionController extends Controller
 {
@@ -32,9 +35,35 @@ class VotacionController extends Controller
         return view('votaciones.eleccion', compact('eleccion'));
     }
 
-    public function votar(Request $r, $votacion_id, $eleccion_id)
+    public function votar(Request $r)
     {
-        
+        $candidatura = Candidatura::findOrFail($r->candidatura);
+
+        $this->authorize('votar', $candidatura);
+
+        $voto = new Voto;
+        $votante = $r->user()->votante;
+        $circunscripcion = $votante->circunscripcion;
+
+        $voto->votante()->associate($votante);
+        $voto->circunscripcion()->associate($circunscripcion);
+        $voto->candidatura()->associate($candidatura);
+
+        $voto->save();
+
+        return back()->with(['voto' => true]);
+
+    }
+
+    public function anular(Request $r)
+    {
+        $voto = Voto::findOrFail($r->voto);
+        $this->authorize('anular', $voto);
+
+        $voto->anular();
+
+        return back()->with(['anular' => true]);
+
     }
 
 }

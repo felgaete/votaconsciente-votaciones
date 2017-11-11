@@ -21,6 +21,16 @@ class Votante extends Model
 
     public function votos()
     {
-        return $this->belongsToMany(EleccionCandidato::class);
+        return $this->hasMany(Voto::class);
+    }
+
+    public function voto(Eleccion $eleccion, Territorio $territorio)
+    {
+        return $this->votos()->whereHas('candidatura',
+            function($builder) use($eleccion, $territorio){
+                return $builder->where('eleccion_id', $eleccion->id)
+                                ->where('territorio_id', $territorio->id);
+            }
+        );
     }
 }

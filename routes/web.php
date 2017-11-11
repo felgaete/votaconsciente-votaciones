@@ -28,7 +28,8 @@ Route::prefix('votacion')->namespace('Votacion')->middleware(['auth', 'auth.vota
     Route::get('/', 'VotacionController@principal')->name('votacion-main');
     Route::get('/{votacion}', 'VotacionController@votacion')->name('votacion-view');
     Route::get('/{votacion}/eleccion/{eleccion}', 'VotacionController@eleccion')->name('votacion-eleccion-view');
-    Route::post('/{votacion}/eleccion/{eleccion}/votar');
+    Route::post('/votar', 'VotacionController@votar')->name('votacion-votar');
+    Route::post('/anular', 'VotacionController@anular')->name('votacion-anular');
 });
 
 Route::middleware(['auth', 'auth.admin'])->namespace('Admin')->prefix('admin')->group(base_path('routes/admin.php'));
