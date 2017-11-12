@@ -57,7 +57,8 @@ class RegisterController extends Controller
           'email.email' => 'Debes ingresar un correo electrónico válido',
           'email.unique' => 'El correo electrónico ya se encuentra utilizado',
           'password.required' => 'Debes ingresar una contraseña',
-          'password.confirmed' => 'Las contraseñas ingresadas no coinciden'
+          'password.confirmed' => 'Las contraseñas ingresadas no coinciden',
+          'password.min' => 'La contraseña debe ser de al menos 6 caracteres.'
         ]);
     }
 
