@@ -3,6 +3,7 @@
 namespace Votaconsciente\Http\Middleware;
 
 use Closure;
+use Illuminate\Validation\UnauthorizedException;
 
 class CheckIsVotante
 {
@@ -19,7 +20,7 @@ class CheckIsVotante
             return $next($request);
         }
 
-        return view('votaciones.novotante');
+        throw new UnauthorizedException('No habilitado como votante');
 
     }
 }

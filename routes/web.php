@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::get('/', function(){
-    return view('welcome');
+    return redirect()->route('votacion-main');
 });
 
 Route::prefix('votante')->namespace('Votante')->middleware(['auth'])->group(function(){
@@ -24,12 +24,14 @@ Route::prefix('votante')->namespace('Votante')->middleware(['auth'])->group(func
     Route::post('/habilitar', 'VotanteController@habilitar')->name('votante-habilitar');
 });
 
-Route::prefix('votacion')->namespace('Votacion')->middleware(['auth', 'auth.votante'])->group(function(){
+Route::prefix('votacion')->namespace('Votacion')->middleware('auth')->group(function(){
     Route::get('/', 'VotacionController@principal')->name('votacion-main');
     Route::get('/{votacion}', 'VotacionController@votacion')->name('votacion-view');
     Route::get('/{votacion}/eleccion/{eleccion}', 'VotacionController@eleccion')->name('votacion-eleccion-view');
-    Route::post('/votar', 'VotacionController@votar')->name('votacion-votar');
-    Route::post('/anular', 'VotacionController@anular')->name('votacion-anular');
+    Route::middleware('auth.votante')->group(function(){
+        Route::post('/votar', 'VotacionController@votar')->name('votacion-votar');
+        Route::post('/anular', 'VotacionController@anular')->name('votacion-anular');
+    });
 });
 
 Route::middleware(['auth', 'auth.admin'])->namespace('Admin')->prefix('admin')->group(base_path('routes/admin.php'));
