@@ -3,6 +3,7 @@
 namespace Votaconsciente\Http\Middleware;
 
 use Closure;
+use Illuminate\Validation\UnauthorizedException;
 
 class CheckIsAdmin
 {
@@ -16,7 +17,7 @@ class CheckIsAdmin
     public function handle($request, Closure $next)
     {
         if(!$request->user()->is_admin){
-          return back();
+          throw new UnauthorizedException("User doesn't have admin rights.");
         }
         return $next($request);
     }
