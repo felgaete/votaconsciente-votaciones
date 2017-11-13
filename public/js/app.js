@@ -10350,6 +10350,10 @@ try {
     __webpack_require__(13);
 } catch (e) {}
 
+$(function () {
+    $('.tooltipped').tooltip();
+});
+
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {

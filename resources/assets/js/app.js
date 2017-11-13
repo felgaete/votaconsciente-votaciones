@@ -4,3 +4,7 @@ try {
     require('materialize-css');
 
 } catch (e) {}
+
+$(function(){
+    $('.tooltipped').tooltip();
+})
