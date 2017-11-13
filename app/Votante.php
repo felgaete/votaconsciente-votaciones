@@ -19,17 +19,24 @@ class Votante extends Model
         return $this->belongsTo(Circunscripcion::class);
     }
 
-    public function votos()
+    public function votos(Eleccion $eleccion = null)
     {
-        return $this->hasMany(Voto::class);
+        if($eleccion){
+            return $this->votos()->whereHas('candidatura',
+                function($builder) use($eleccion){
+                    return $builder->where('eleccion_id', $eleccion->id);
+                }
+            );
+        }else{
+            return $this->hasMany(Voto::class);
+        }
     }
 
     public function voto(Eleccion $eleccion, Territorio $territorio)
     {
-        return $this->votos()->whereHas('candidatura',
-            function($builder) use($eleccion, $territorio){
-                return $builder->where('eleccion_id', $eleccion->id)
-                                ->where('territorio_id', $territorio->id);
+        return $this->votos($eleccion)->whereHas('candidatura',
+            function($builder) use($territorio){
+                return $builder->where('territorio_id', $territorio->id);
             }
         );
     }

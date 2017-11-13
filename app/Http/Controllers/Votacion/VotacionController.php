@@ -4,21 +4,23 @@ namespace Votaconsciente\Http\Controllers\Votacion;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Votaconsciente\Http\Controllers\FrontController as Controller;
 use Votaconsciente\Votacion;
 use Votaconsciente\Eleccion;
 use Votaconsciente\Candidatura;
 use Votaconsciente\Voto;
+use Votaconsciente\Territorio;
 
 class VotacionController extends Controller
 {
 
     public function principal()
     {
-        $votacion = Votacion::where('principal', true)->with('elecciones')->first();
+        $votaciones = Votacion::activas()->get();
 
-        return view('votaciones.main')->with(compact('votacion'));
+        return view('votaciones.main')->with(compact('votaciones'));
     }
 
     public function votacion(Request $r, $votacion_id)
@@ -30,13 +32,24 @@ class VotacionController extends Controller
 
     public function eleccion($votacion_id, $eleccion_id)
     {
+
         $votacion = Votacion::with(['elecciones' => function($builder) use($eleccion_id){
             return $builder->where('id', '<>', $eleccion_id);
         }])->findOrFail($votacion_id);
+
         $eleccion = Eleccion::where('votacion_id', $votacion_id)
             ->with(['candidaturas.politico', 'candidaturas.territorio'])
             ->findOrFail($eleccion_id);
-        return view('votaciones.eleccion', compact('eleccion', 'votacion'));
+
+        $votar = function(Territorio $territorio) use($eleccion){
+            return Gate::allows('votar-territorio-electoral', [$eleccion, $territorio]);
+        };
+        $votos = collect();
+        if(Auth::user()->votante){
+            $votos = Auth::user()->votante->votos($eleccion)->get();
+        }
+        return view('votaciones.eleccion', compact('eleccion', 'votacion',
+            'votos', 'votar'));
     }
 
     public function votar(Request $r)
