@@ -8,6 +8,17 @@
 <?php $canVotar = $votar($territorio); ?>
 <div class="section">
     <h5>Territorio {{Illuminate\Support\Str::title($territorio->nombre)}}</h5>
+    @if(session('voto'))
+    <div class="card-panel green white-text">
+        Se ha ingresado tu voto, si deseas puedes anularlo presionando el botón
+        junto al candidato por el que has votado.
+    </div>
+    @endif
+    @if(session('anular'))
+    <div class="card-panel green white-text">
+        Se ha anulado tu voto
+    </div>
+    @endif
     @foreach($group->chunk(3) as $candidatura_group)
     <div class="row">
         @foreach($candidatura_group as $candidatura)
@@ -19,7 +30,8 @@
                     <form action="{{route('votacion-votar')}}" method="post">
                         {{csrf_field()}}
                         <input type="hidden" name="candidatura" value="{{$candidatura->id}}">
-                        <button type="submit" class="btn-floating halfway-fab waves-effect waves-light green">
+                        <button type="submit" class="tooltipped btn-floating halfway-fab waves-effect waves-light green"
+                            data-position="bottom" data-delay="50" data-tooltip="Vota por este candidato">
                             <i class="material-icons">thumb_up</i>
                         </button>
                     </form>
@@ -27,7 +39,8 @@
                     <form method="post" action="{{route('votacion-anular')}}">
                         {{csrf_field()}}
                         <input type="hidden" name="voto" value="{{$voto->id}}">
-                        <button class="btn-floating halfway-fab waves-effect waves-light red" type="submit">
+                        <button type="submit" class="tooltipped btn-floating halfway-fab waves-effect waves-light red"
+                            data-position="bottom" data-delay="50" data-tooltip="Vota por este candidato">
                             <i class="material-icons">thumb_down</i>
                         </button>
                     </form>
