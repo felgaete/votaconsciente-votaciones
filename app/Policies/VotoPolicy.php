@@ -27,14 +27,20 @@ class VotoPolicy
 
     protected function query(User $user, Eleccion $eleccion, Territorio$territorio)
     {
-        return $this->db->from('votante_territorio_electoral')
+        if($user->votante){
+            return $this->db->from('votante_territorio_electoral')
             ->where('votante_id', $user->votante->id)
             ->where('eleccion_id', $eleccion->id)
             ->where('territorio_id', $territorio->id);
+        }
+        return false;
     }
 
     public function anular(User $user, Voto $voto)
     {
-        return $voto->votante->id == $user->votante->id;
+        if($user->votante){
+            return $voto->votante->id == $user->votante->id;
+        }
+        return false;
     }
 }
