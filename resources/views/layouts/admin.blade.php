@@ -11,7 +11,7 @@
     <title>Administración - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -36,6 +36,6 @@
         </div>
       </div>
     </div>
-    <script src="{{ asset('js/app.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('js/admin.js') }}" charset="utf-8"></script>
   </body>
 </html>
