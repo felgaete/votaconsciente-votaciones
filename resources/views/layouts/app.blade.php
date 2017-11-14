@@ -20,13 +20,14 @@
             <div class="row">
                 <div class="col m3 s12">
                     <div class="collection">
-                        <div class="collection-header"><h6>Cuenta</h6></div>
-                        <a href="#" class="collection-item">Mis datos</a>
+                        <a href="{{route('votacion-main')}}" class="collection-item">Votaciones</a>
+                        <a href="{{route('votante-edit')}}" class="collection-item">Mis datos</a>
                         <a class="collection-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             Salir
                         </a>
+
                     </div>
                 </div>
                 <div class="col m9 s12">

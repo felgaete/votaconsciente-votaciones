@@ -20,7 +20,6 @@ Route::get('/', function(){
 Route::prefix('votante')->namespace('Votante')->middleware(['auth'])->group(function(){
     Route::get('/', 'VotanteController@edit')->name('votante-edit');
     Route::post('/update', 'VotanteController@update')->name('votante-update');
-    Route::get('/habilitar', 'VotanteController@habilitarView')->name('votante-habilitar-view');
     Route::post('/habilitar', 'VotanteController@habilitar')->name('votante-habilitar');
 });
 
