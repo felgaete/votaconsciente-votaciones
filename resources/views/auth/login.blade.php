@@ -11,7 +11,7 @@
                     <div class="card-panel green white-text">{{session('confirmation-success')}}</div>
                     @endif
                     @if (session('confirmation-danger'))
-                    <div class="card-panel red white-text">{{session('confirmation-danger')}}</div>
+                    <div class="card-panel red white-text">{!! session('confirmation-danger') !!}</div>
                     @endif
                     <form role="form" method="post" action="{{ url('/login') }}">
                         @if($errors->has('email'))
