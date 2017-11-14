@@ -18,7 +18,7 @@
                 {{ csrf_field() }}
             </form>
             <div class="row">
-                <div class="col m3 s12">
+                <div class="col m2 s12">
                     <div class="collection">
                         <a href="{{route('votacion-main')}}" class="collection-item">Votaciones</a>
                         <a href="{{route('votante-edit')}}" class="collection-item">Mis datos</a>
@@ -30,7 +30,7 @@
 
                     </div>
                 </div>
-                <div class="col m9 s12">
+                <div class="col m10 s12">
                     @yield('content')
                 </div>
             </div>

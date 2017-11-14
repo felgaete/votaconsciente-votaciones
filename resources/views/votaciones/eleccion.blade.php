@@ -30,7 +30,7 @@
                     <form action="{{route('votacion-votar')}}" method="post">
                         {{csrf_field()}}
                         <input type="hidden" name="candidatura" value="{{$candidatura->id}}">
-                        <button type="submit" class="tooltippeds btn-floating halfway-fab waves-effect waves-light green"
+                        <button type="submit" class="btn-large btn-floating halfway-fab waves-effect waves-light green"
                             data-position="bottom" data-delay="50" data-tooltip="Vota por este candidato">
                             <i class="material-icons">thumb_up</i>
                         </button>
@@ -39,7 +39,7 @@
                     <form method="post" action="{{route('votacion-anular')}}">
                         {{csrf_field()}}
                         <input type="hidden" name="voto" value="{{$voto->id}}">
-                        <button type="submit" class="tooltippeds btn-floating halfway-fab waves-effect waves-light red"
+                        <button type="submit" class="btn-floating btn-large halfway-fab waves-effect waves-light red"
                             data-position="bottom" data-delay="50" data-tooltip="Anula tu voto">
                             <i class="material-icons">thumb_down</i>
                         </button>
