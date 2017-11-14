@@ -3,6 +3,12 @@
 @section('content')
 <h4>Elección {{ Illuminate\Support\Str::title($eleccion->tipo) }}</h4>
 <div class="divider"></div>
+@empty(Auth::user()->votante)
+<div class="card-panel red white-text">
+  No puedes votar hasta que modifiques tu perfil.<br>
+  Puedes realizar esta acción <a class="white-text" style="text-decoration: underline;" href="{{ route('votante-edit') }}">aquí</a>
+</div>
+@endempty
 @foreach($eleccion->candidaturas->groupBy('territorio_id') as $group)
 @if($group->first() && ($territorio = $group->first()->territorio))
 <?php $canVotar = $votar($territorio); ?>
