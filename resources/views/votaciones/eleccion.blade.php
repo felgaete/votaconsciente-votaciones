@@ -25,7 +25,7 @@
         <div class="col s12 m6 l4">
             <div class="card">
                 <div class="card-image">
-                    <img class="card-img-top responsive-img" src="http://lorempixel.com/400/200/people/" alt="Foto candidato">
+                    <img class="card-img-top responsive-img" src="{{$candidatura->politico->imagen}}" alt="">
                     @if($canVotar)
                     <form action="{{route('votacion-votar')}}" method="post">
                         {{csrf_field()}}
@@ -50,7 +50,7 @@
                     <span class="card-title">{{Illuminate\Support\Str::title($candidatura->politico->nombre)}}</span>
                     <p>{{$candidatura->politico->partido_politico}}</p>
                     <div class="card-action">
-                        <a class="blue-text" href="#">+ información</a>
+                        <a class="blue-text" href="{{$candidatura->politico->url}}">+ información</a>
                     </div>
                 </div>
             </div>
