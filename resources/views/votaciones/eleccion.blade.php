@@ -50,7 +50,7 @@
                     <span class="card-title">{{Illuminate\Support\Str::title($candidatura->politico->nombre)}}</span>
                     <p>{{$candidatura->politico->partido_politico}}</p>
                     <div class="card-action">
-                        <a class="blue-text" href="{{$candidatura->politico->url}}">+ información</a>
+                        <a class="blue-text" href="{{$candidatura->politico->url}}" target="_top">+ información</a>
                     </div>
                 </div>
             </div>
