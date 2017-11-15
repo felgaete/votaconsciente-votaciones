@@ -7,12 +7,16 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Ingresa</span>
-                    @if (session('confirmation-success'))
-                    <div class="card-panel green white-text">{{session('confirmation-success')}}</div>
-                    @endif
-                    @if (session('confirmation-danger'))
-                    <div class="card-panel red white-text">{!! session('confirmation-danger') !!}</div>
-                    @endif
+                    <div class="row">
+                        <div class="col s12">
+                            @if (session('confirmation-success'))
+                            <div class="card-panel green white-text">{{session('confirmation-success')}}</div>
+                            @endif
+                            @if (session('confirmation-danger'))
+                            <div class="card-panel red white-text">{!! session('confirmation-danger') !!}</div>
+                            @endif
+                        </div>
+                    </div>
                     <form role="form" method="post" action="{{ url('/login') }}">
                         @if($errors->has('email'))
                         <div class="card-panel red white-text">{{$errors->first('email')}}</div>

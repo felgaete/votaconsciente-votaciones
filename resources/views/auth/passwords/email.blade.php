@@ -8,8 +8,12 @@
                 <div class="card-content">
                     <span class="card-title">Reestablecer contraseña</span>
                     @if(session('status'))
-                    <div class="card-panel green white-text">
-                        {{session('status')}}
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="card-panel green white-text">
+                                {{session('status')}}
+                            </div>
+                        </div>
                     </div>
                     @endif
                     <form role="form" method="post" action="{{ route('password.email') }}">

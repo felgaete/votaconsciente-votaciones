@@ -8,19 +8,27 @@
                 <div class="card-content">
                     <span class="card-title">Registrarse</span>
                     @if(session('confirmation-success'))
-                    <div class="card-panel green white-text">
-                        {{session('confirmation-success')}}
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="card-panel green white-text">
+                                {{session('confirmation-success')}}
+                            </div>
+                        </div>
                     </div>
                     @else
                     <form role="form" method="post" action="{{ url('/register') }}">
                         {{csrf_field()}}
                         @if($errors->isNotEmpty())
-                        <div class="card-panel red white-text">
-                            <ul>
-                                @foreach($errors->all() as $e)
-                                <li>{{$e}}</li>
-                                @endforeach
-                            </ul>
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card-panel red white-text">
+                                    <ul>
+                                        @foreach($errors->all() as $e)
+                                        <li>{{$e}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         @endif
                         <div class="row">
