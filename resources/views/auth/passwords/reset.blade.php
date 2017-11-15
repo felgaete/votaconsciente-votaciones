@@ -3,62 +3,40 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reestablecer contraseña</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
-                        {{ csrf_field() }}
-
+        <div class="col s12 m8 offset-m2">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Reestablecer contraseña</span>
+                    @if($errors->isNotEmpty())
+                    <div class="card-panel red white-text form-errors">
+                        <ul>
+                            @foreach($errors->all() as $e)
+                            <li>{{$e}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    <form role="form" method="post" action="{{ route('password.request') }}">
+                        {{csrf_field()}}
                         <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input class="validate" id="email" type="email" name="email" value="{{ $email or old('email') }}" required autofocus>
+                                <label for="email" @unless(empty(old('email'))) class="active" @endunless>Email</label>
                             </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="input-field col s12">
+                                <input class="validate" id="password" name="password" type="password" required>
+                                <label for="password">Contraseña</label>
                             </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirma tu contraseña</label>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="input-field col s12">
+                                <input class="validate" id="password-confirm" type="password" name="password_confirmation" required>
+                                <label for="password-confirm">Confirma tu contraseña</label>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reestablecer
-                                </button>
+                            <div class="col s12">
+                                <button class="btn waves-effect waves-light" type="submit">Reestablecer</button>
+                            </div>
+                            <div class="col s12">
+                                <a href="{{ url('login') }}">Volver</a>
                             </div>
                         </div>
                     </form>
