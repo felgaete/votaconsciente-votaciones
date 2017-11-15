@@ -15,7 +15,7 @@
                     <form role="form" method="post" action="{{ url('/register') }}">
                         {{csrf_field()}}
                         @if($errors->isNotEmpty())
-                        <div class="card-panel red white-text form-errors">
+                        <div class="card-panel red white-text">
                             <ul>
                                 @foreach($errors->all() as $e)
                                 <li>{{$e}}</li>

@@ -8,7 +8,7 @@
                 <div class="card-content">
                     <span class="card-title">Reestablecer contraseña</span>
                     @if($errors->isNotEmpty())
-                    <div class="card-panel red white-text form-errors">
+                    <div class="card-panel red white-text">
                         <ul>
                             @foreach($errors->all() as $e)
                             <li>{{$e}}</li>

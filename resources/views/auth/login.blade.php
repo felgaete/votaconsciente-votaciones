@@ -15,10 +15,10 @@
                     @endif
                     <form role="form" method="post" action="{{ url('/login') }}">
                         @if($errors->has('email'))
-                        <div class="card-panel red white-text form-errors">{{$errors->first('email')}}</div>
+                        <div class="card-panel red white-text">{{$errors->first('email')}}</div>
                         @endif
                         @if($errors->has('password'))
-                        <div class="card-panel red white-text form-errors">{{$errors->first('password')}}</div>
+                        <div class="card-panel red white-text">{{$errors->first('password')}}</div>
                         @endif
                         {{csrf_field()}}
                         <div class="row">
