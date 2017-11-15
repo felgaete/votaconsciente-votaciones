@@ -10,8 +10,8 @@ class ServelArchivo extends Model
 
     protected $guarded = ['id'];
 
-    public const PADRON_ELECTORAL_TYPE = 'padron_electoral';
-    public const CANDIDATURAS_TYPE = 'candidaturas';
+    const PADRON_ELECTORAL_TYPE = 'padron_electoral';
+    const CANDIDATURAS_TYPE = 'candidaturas';
 
     public function votantes()
     {
