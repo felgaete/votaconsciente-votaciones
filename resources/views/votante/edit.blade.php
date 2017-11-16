@@ -32,17 +32,12 @@
                         <div class="input-field col s12">
                             <i class="material-icons prefix">perm_identity</i>
                             <input class="ci-field" {{ $conVoto ? 'readonly' : ''}} name="ci" id="ci" type="text" value="{{$user->votante ? $user->votante->ci : ''}}">
-                            <label for="ci" class="active">Rut de voto</label>
+                            <label for="ci" class="active">Rut</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
                             <input id="nombre" type="text" name="nombre" value="{{$user->name}}" class="validate" required>
                             <label for="nombre" class="active">Nombre</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">email</i>
-                            <input readonly type="text" value="{{$user->email}}">
-                            <label for="nombre" class="active">Email</label>
                         </div>
                         <div class="col s12">
                             <button class="btn waves-effect waves-light" type="submit">Actualizar mis datos</button>
