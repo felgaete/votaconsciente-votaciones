@@ -37,10 +37,8 @@ class VotanteController extends Controller
         $result = back()->with(['editado' => 'Perfil editado']);
         if(is_null($habilitado)){
             return $result;
-        }else if($habilitado){
-            return $result->with(['habilitado' => true]);
         }else{
-            return $result->withErrors('No se pudo habilitar el voto.');
+            return $result->with(['habilitado' => $habilitado]);
         }
 
     }
