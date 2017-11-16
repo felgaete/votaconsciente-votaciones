@@ -57,7 +57,7 @@
                                 <i class="material-icons right">thumb_down</i>Anular mi voto</button>
                             </form>
                             @else
-                            <button class="btn vote none" type="button" disabled>Ya has votado</button>
+                            <button class="btn vote none" type="button" disabled>No puedes votar</button>
                             @endif
                         </div>
                     </div>
