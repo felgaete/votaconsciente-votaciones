@@ -8,7 +8,7 @@
                 <div class="card-content">
                     <span class="card-title">
                         Ingresa con tu cuenta.<br>
-                        <small>Identíficate para que nos indiques tu preferencia de voto</small> 
+                        <small>Identíficate con tus datos, así podemos hacer tu voto único.</small> 
                     </span>
                     <div class="row">
                         <div class="col s12">

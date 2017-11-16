@@ -7,8 +7,8 @@ try {
 
 var formatoRut = function(){
     var $this = $(this);
-    $this.on('change, input', function(){
-        var val = this.value.replace(/\.|-/g, '');
+    $this.on('change, input', function(e){
+        var val = this.value.replace(/[\.\-A-Ja-jL-Zl-z]/g, '');
         if(val.length > 1){
             val = val.split('').reverse().join('');
             var dv = val.substring(0, 1);

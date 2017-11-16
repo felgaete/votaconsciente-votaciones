@@ -6,3 +6,12 @@
     padding: 15px 7px;
     font-size: 0.85rem;
 }
+
+.vote-actions .vote, .vote .election .btn{
+    display: block;
+    width: 100%;
+}
+.candidate-name{
+    height: 100px;
+    padding: 5px 24px !important;
+}

@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">
-                        Registrate para que puedas indicarnos tu preferencia. <br>
+                        Registrate indicándonos tus datos. <br>
                         <small>
-                            Estos datos nos permiten validar tu voto.
-                            Serán utilizados sólo con fin estadístico.
+                            Con estos datos podemos validar tu voto y hacerlo único.<br>
+                            Los datos no serán utilizados con otro fin que no sea el estadístico.
                         </small>
                     </span>
                     @if(session('confirmation-success'))
@@ -36,7 +36,7 @@
                                         <div class="col s11">
                                             <p>No se pudo validar tu Rut como un votante válido.</p>
                                             <p>¿Se trata de un error? Envíanos un mensaje privado a través del
-                                                <a class="white-text" style="text-decoration: underline;" href="https://www.facebook.com/VotaConscienteChile">fanpage de Votaconsciente</a>
+                                                <a class="white-text" style="text-decoration: underline;" href="https://www.facebook.com/VotaConscienteChile" target="_blank">fanpage de vota consciente</a>
                                                 indicándonos esta situación.
                                             </p>
                                         </div>
@@ -56,7 +56,7 @@
                         @endif
                         <div class="row">
                             <div class="input-field col s12">
-                                <input class="validate ci-field" id="ci" type="text" name="ci" value="{{old('ci')}}" required>
+                                <input class="validate ci-field" id="ci" type="text" name="ci" value="{{old('ci')}}" placeholder="99.999.999-9" required>
                                 <label for="ci" @unless(empty(old('name'))) class="active" @endunless>Rut</label>
                                 <small>Tu Rut nos permite que exista un voto por persona.</small>
                             </div>
