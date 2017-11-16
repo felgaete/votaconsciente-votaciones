@@ -6,6 +6,7 @@ use Votaconsciente\User;
 use Votaconsciente\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Bestmomo\LaravelEmailConfirmation\Traits\RegistersUsers;
+use Votaconsciente\Rules\Rut;
 
 class RegisterController extends Controller
 {
@@ -48,17 +49,21 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'ci' => ['required' ,new Rut, 'exists:servel_votantes,ci', 'unique:users,rut'],
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ], [
-          'name.required' => 'Debes ingresar un nombre',
-          'email.required' => 'Debes ingresar un correo electrónico válido',
-          'email.email' => 'Debes ingresar un correo electrónico válido',
-          'email.unique' => 'El correo electrónico ya se encuentra utilizado',
-          'password.required' => 'Debes ingresar una contraseña',
-          'password.confirmed' => 'Las contraseñas ingresadas no coinciden',
-          'password.min' => 'La contraseña debe ser de al menos 6 caracteres.'
+            'ci.required' => 'Debes ingresar tu Rut',
+            'ci.unique' => 'El rut que ingresaste, ya está siendo utilizado.',
+            'ci.exists' => 'no-vote',
+            'name.required' => 'Debes ingresar un nombre',
+            'email.required' => 'Debes ingresar un correo electrónico válido',
+            'email.email' => 'Debes ingresar un correo electrónico válido',
+            'email.unique' => 'El correo electrónico ya se encuentra utilizado',
+            'password.required' => 'Debes ingresar una contraseña',
+            'password.confirmed' => 'Las contraseñas ingresadas no coinciden',
+            'password.min' => 'La contraseña debe ser de al menos 6 caracteres.'
         ]);
     }
 
@@ -74,6 +79,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'rut' => $data['ci']
         ]);
     }
 }

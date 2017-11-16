@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'rut',
     ];
 
     /**
@@ -38,13 +38,16 @@ class User extends Authenticatable
         return $this->hasOne(Votante::class);
     }
 
-    public function habilitarVoto($ci)
+    public function habilitarVoto($ci = null)
     {
         if($this->votante){
             return true;
         }
+        if(is_null($ci)){
+            $ci = $this->rut;
+        }
         try{
-            $votante = Votante::whereCi($ci)->firstOrFail();
+            $votante = Votante::whereCi($ci)->whereNull('user_id')->firstOrFail();
         }catch(ModelNotFoundException $e){
             return false;
         }

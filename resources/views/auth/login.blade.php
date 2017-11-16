@@ -6,7 +6,10 @@
         <div class="col s12 m8 offset-m2">
             <div class="card">
                 <div class="card-content">
-                    <span class="card-title">Ingresa</span>
+                    <span class="card-title">
+                        Ingresa con tu cuenta.<br>
+                        <small>Identíficate para que nos indiques tu preferencia de voto</small> 
+                    </span>
                     <div class="row">
                         <div class="col s12">
                             @if (session('confirmation-success'))

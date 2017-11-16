@@ -56,12 +56,6 @@ class VotanteController extends Controller
         if($user->votante){
             return;
         }
-        $votante = Votante::whereCi($r->ci)->first();
-        if($votante){
-            $votante->user()->associate($user);
-            $votante->save();
-            return true;
-        }
-        return false;
+        return $user->habilitarVoto($r->ci);
     }
 }

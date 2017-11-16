@@ -6,7 +6,13 @@
         <div class="col s12 m8 offset-m2">
             <div class="card">
                 <div class="card-content">
-                    <span class="card-title">Registrarse</span>
+                    <span class="card-title">
+                        Registrate para que puedas indicarnos tu preferencia. <br>
+                        <small>
+                            Estos datos nos permiten validar tu voto.
+                            Serán utilizados sólo con fin estadístico.
+                        </small>
+                    </span>
                     @if(session('confirmation-success'))
                     <div class="row">
                         <div class="col s12">
@@ -21,6 +27,22 @@
                         @if($errors->isNotEmpty())
                         <div class="row">
                             <div class="col s12">
+                                @if($errors->has('ci') && $errors->first('ci') === 'no-vote')
+                                <div class="card-panel red white-text">
+                                    <div class="row">
+                                        <div class="col s1 text-center valign-wrapper">
+                                            <i class="material-icons">warning</i>
+                                        </div>
+                                        <div class="col s11">
+                                            <p>No se pudo validar tu Rut como un votante válido.</p>
+                                            <p>¿Se trata de un error? Envíanos un mensaje privado a través del
+                                                <a class="white-text" style="text-decoration: underline;" href="https://www.facebook.com/VotaConscienteChile">fanpage de Votaconsciente</a>
+                                                indicándonos esta situación.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
                                 <div class="card-panel red white-text">
                                     <ul>
                                         @foreach($errors->all() as $e)
@@ -28,10 +50,16 @@
                                         @endforeach
                                     </ul>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         @endif
                         <div class="row">
+                            <div class="input-field col s12">
+                                <input class="validate ci-field" id="ci" type="text" name="ci" value="{{old('ci')}}" required>
+                                <label for="ci" @unless(empty(old('name'))) class="active" @endunless>Rut</label>
+                                <small>Tu Rut nos permite que exista un voto por persona.</small>
+                            </div>
                             <div class="input-field col s12">
                                 <input class="validate" id="name" type="text" name="name" value="{{old('name')}}" required>
                                 <label for="name" @unless(empty(old('name'))) class="active" @endunless>Nombre</label>
@@ -39,6 +67,7 @@
                             <div class="input-field col s12">
                                 <input class="validate" id="email" type="email" name="email" value="{{old('email')}}" required>
                                 <label for="email" @unless(empty(old('email'))) class="active" @endunless>Email</label>
+                                <small>Tu correo nos indica que no eres un robot</small>
                             </div>
                             <div class="input-field col s12">
                                 <input class="validate" id="password" name="password" type="password" required>
@@ -49,7 +78,7 @@
                                 <label for="password-confirm">Confirma tu contraseña</label>
                             </div>
                             <div class="col s12">
-                                <button class="btn waves-effect waves-light" type="submit">Registrar</button>
+                                <button class="btn waves-effect waves-light" type="submit">Registrarse</button>
                             </div>
                             <div class="col s12">
                                 <a href="{{ url('login') }}">¿Ya tienes cuenta? Ingresa.</a>

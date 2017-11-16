@@ -28,32 +28,37 @@ class Rut implements Rule
         if(strlen($value) === 0){
             return true;
         }
-        $value = str_replace('.', '', $value);
-        $d = preg_split('/\-/', $value);
-        if(count($d) !== 2){
+        try{
+            $value = str_replace('.', '', $value);
+            $d = preg_split('/\-/', $value);
+            if(count($d) !== 2){
+                return false;
+            }
+            $rut = $d[0];
+            $dv = $d[1];
+            $sum = 0;
+            $j = 2;
+            for($i = strlen($rut) - 1; $i >= 0; $i--){
+                $sum += $j * $rut[$i];
+                $j++;
+                if($j == 8){
+                    $j = 2;
+                }
+            }
+
+            $dvr = 11 - $sum % 11;
+            if($dvr == 10){
+                $dvr = 'K';
+            }else if($dvr == 11){
+                $dvr = '0';
+            }else{
+                $dvr = (string)$dvr;
+            }
+            return strtoupper($dv) === $dvr;
+
+        }catch(\Exception $e){
             return false;
         }
-        $rut = $d[0];
-        $dv = $d[1];
-        $sum = 0;
-        $j = 2;
-        for($i = strlen($rut) - 1; $i >= 0; $i--){
-            $sum += $j * $rut[$i];
-            $j++;
-            if($j == 8){
-                $j = 2;
-            }
-        }
-
-        $dvr = 11 - $sum % 11;
-        if($dvr == 10){
-            $dvr = 'K';
-        }else if($dvr == 11){
-            $dvr = '0';
-        }else{
-            $dvr = (string)$dvr;
-        }
-        return strtoupper($dv) === $dvr;
 
     }
 
@@ -64,6 +69,6 @@ class Rut implements Rule
      */
     public function message()
     {
-        return 'El rut no es válido.';
+        return 'El rut que ingresaste no es válido.';
     }
 }

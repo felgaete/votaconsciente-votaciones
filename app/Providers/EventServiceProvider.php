@@ -13,9 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Votaconsciente\Events\Event' => [
-            'Votaconsciente\Listeners\EventListener',
-        ],
+        'Illuminate\Auth\Events\Registered' => [
+            'Votaconsciente\Listeners\VotanteRegistradoListener'
+        ]
     ];
 
     /**
