@@ -14,7 +14,7 @@
 <body>
     <div id="app">
         <div class="section">
-            @auth
+            @if((!isset($nomenu) && Auth::check()) || (isset($nomenu) && !$nomenu && Auth::check()))
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>

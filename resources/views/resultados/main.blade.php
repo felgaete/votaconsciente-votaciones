@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['nomenu' => Request::has('nomenu')])
 @section('title', 'Resultados')
 @section('js')
 <script src="{{asset('js/charts.js')}}" charset="utf-8"></script>
