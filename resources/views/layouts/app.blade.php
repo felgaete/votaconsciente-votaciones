@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') - Votaconsciente</title>
     <!-- Styles -->
+    @yield('css')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -21,6 +22,7 @@
                 <div class="col m2 s12">
                     <div class="collection">
                         <a href="{{route('votacion-main')}}" class="collection-item">Votaciones</a>
+                        <a href="{{route('resultados-main')}}" class="collection-item">Resultados</a>
                         <a href="{{route('votante-edit')}}" class="collection-item">Mis datos</a>
                         <a class="collection-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -41,5 +43,6 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('js')
 </body>
 </html>

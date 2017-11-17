@@ -26,4 +26,9 @@ class Candidatura extends Model
     {
         return $this->belongsTo(Eleccion::class);
     }
+
+    public function resultado()
+    {
+        return $this->hasOne(ResultadoCandidatura::class);
+    }
 }
