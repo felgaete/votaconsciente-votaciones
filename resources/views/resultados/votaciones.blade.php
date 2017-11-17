@@ -5,7 +5,7 @@
     <div class="section">
         <div class="row">
             @foreach($votacion->elecciones as $eleccion)
-            <div class="col s9">
+            <div class="col s12 m9">
                 <div class="card">
                     <div class="center-align card-title">Resultados de la elección</div>
                     <div class="card-content">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s3">
+            <div class="col s12 m3">
                 <div class="card-panel">
                     <table>
                         <thead>
