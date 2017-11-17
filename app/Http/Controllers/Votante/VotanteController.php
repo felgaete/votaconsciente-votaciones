@@ -7,6 +7,7 @@ use Votaconsciente\Http\Controllers\FrontController as Controller;
 use Votaconsciente\Votante;
 use Votaconsciente\Rules\Rut;
 use Votaconsciente\Rules\ServelVotante;
+use Illuminate\Auth\Events\Registered;
 
 class VotanteController extends Controller
 {
@@ -55,6 +56,13 @@ class VotanteController extends Controller
         if($user->votante){
             return;
         }
-        return $user->habilitarVoto($r->ci);
+        try{
+            $user->rut = $r->ci;
+            $user->save();
+            event(new Registerd($user));
+        }catch(\Exception $e){
+            return false;
+        }
+        return true;
     }
 }
