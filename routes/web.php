@@ -36,6 +36,7 @@ Route::prefix('votacion')->namespace('Votacion')->middleware('auth')->group(func
 Route::prefix('resultados')->namespace('Resultados')->group(function(){
     Route::get('/', 'ResultadosController@principal')->name('resultados-main');
     Route::get('/eleccion/{id}', 'ResultadosController@eleccion')->name('resultados-eleccion');
+    Route::get('/eleccion/{id}/frame', 'ResultadosController@eleccionFrame')->name('resultados-eleccion-frame');
 });
 
 Route::middleware(['auth', 'auth.admin'])->namespace('Admin')->prefix('admin')->group(base_path('routes/admin.php'));

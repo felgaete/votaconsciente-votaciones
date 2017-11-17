@@ -17326,6 +17326,7 @@ ChartResultado.prototype.getData = function (callback) {
         url: url,
         error: function error() {
             self.error = true;
+            callback();
         }
     }).done(function (data) {
         self.loadData(data);
@@ -17336,8 +17337,12 @@ ChartResultado.prototype.getData = function (callback) {
 ChartResultado.prototype.loadChart = function () {
     var self = this;
     this.getData(function () {
-        self.creator = new ChartCreator(self.getCanvas(), self.eleccion.candidaturas);
-        self.creator.draw();
+        if (self.error) {
+            console.log(self.eleccion.tipo + ' couldnt load.');
+        } else {
+            self.creator = new ChartCreator(self.getCanvas(), self.eleccion.candidaturas);
+            self.creator.draw();
+        }
     });
 };
 
