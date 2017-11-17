@@ -59,7 +59,7 @@ class VotanteController extends Controller
         try{
             $user->rut = $r->ci;
             $user->save();
-            event(new Registerd($user));
+            event(new Registered($user));
         }catch(\Exception $e){
             return false;
         }
