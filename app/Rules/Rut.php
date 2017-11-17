@@ -3,6 +3,7 @@
 namespace Votaconsciente\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class Rut implements Rule
 {
@@ -28,6 +29,10 @@ class Rut implements Rule
         if(strlen($value) === 0){
             return true;
         }
+        if(!preg_match("/^(\d{1,3})(\.\d{3})*\-[\d|k|K]$/", $value)){
+            return false;
+        }
+
         try{
             $value = str_replace('.', '', $value);
             $d = preg_split('/\-/', $value);
@@ -69,6 +74,6 @@ class Rut implements Rule
      */
     public function message()
     {
-        return 'El rut que ingresaste no es válido.';
+        return 'El rut que ingresaste no es válido. Debe ser en el formato XX.XXX.XXX-X.';
     }
 }

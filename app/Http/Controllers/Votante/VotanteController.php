@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Votaconsciente\Http\Controllers\FrontController as Controller;
 use Votaconsciente\Votante;
 use Votaconsciente\Rules\Rut;
+use Votaconsciente\Rules\ServelVotante;
 
 class VotanteController extends Controller
 {
@@ -21,7 +22,7 @@ class VotanteController extends Controller
 
         $this->validate($r, [
             'nombre' => 'required|max:255',
-            'ci' => new Rut
+            'ci' => [new Rut, new ServelVotante]
         ],[
             'nombre.required' => 'Debes ingresar un nombre',
             'nombre.max' => 'El nombre no debe superar los :max caracteres.',

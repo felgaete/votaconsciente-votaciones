@@ -38,18 +38,18 @@ class User extends Authenticatable
         return $this->hasOne(Votante::class);
     }
 
-    public function habilitarVoto($ci = null)
+    public function habilitarVoto(Votante $votante = null)
     {
         if($this->votante){
             return true;
         }
-        if(is_null($ci)){
-            $ci = $this->rut;
-        }
-        try{
-            $votante = Votante::whereCi($ci)->whereNull('user_id')->firstOrFail();
-        }catch(ModelNotFoundException $e){
-            return false;
+        $ci = $this->rut;
+        if(is_null($votante)){
+            try{
+                $votante = Votante::whereCi($ci)->whereNull('user_id')->firstOrFail();
+            }catch(ModelNotFoundException $e){
+                return false;
+            }
         }
         $votante->user()->associate($this);
         $votante->save();
