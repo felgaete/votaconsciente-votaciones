@@ -41,12 +41,13 @@ class ServelVotante implements Rule
         //Primero se obtiene de la tabla votantes el rut dado
         $votante = Votante::where('ci', $value)->first();
 
-        if($votante->user_id){
+        if(!is_null($votante) && $votante->user_id){
             //El votante obtenido dentro de la validacion, ya tiene un
             //usuario asociado, lo que significa que el no tiene el rut
             //en la tabla de usuarios esto no deberia ocurrir dentro de la aplicacion
             //pero por seguridad se agrega
             $this->message = 'El rut ingresado ya fue utilizado.';
+            return false;
         }
 
         if(is_null($votante)){
