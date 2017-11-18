@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     @else
-                    <form role="form" method="post" action="{{ url('/register') }}">
+                    <form class="block-on-submit" role="form" method="post" action="{{ url('/register') }}">
                         {{csrf_field()}}
                         @if($errors->isNotEmpty())
                         <div class="row">
@@ -66,7 +66,8 @@
                                 <label for="password-confirm">Confirma tu contraseña</label>
                             </div>
                             <div class="col s12">
-                                <button class="btn waves-effect waves-light" type="submit">Registrarse</button>
+                                <i class="material-icons left hide submit-icon">sync</i>
+                                <button class="btn waves-effect waves-light" data-submit-text="Registrando" type="submit">Registrarse</button>
                             </div>
                             <div class="col s12">
                                 <a href="{{ url('login') }}">¿Ya tienes cuenta? Ingresa.</a>

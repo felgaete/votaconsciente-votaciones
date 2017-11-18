@@ -15,3 +15,19 @@
     height: 100px;
     padding: 5px 24px !important;
 }
+
+.btn.disabled.sending:hover, .sending.disabled.btn-large:hover,
+.sending.btn-floating.disabled:hover, .sending.btn-large.disabled:hover,
+.sending.btn-flat.disabled:hover, .sending.btn:disabled:hover,
+.sending.btn-large:disabled:hover, .sending.btn-floating:disabled:hover,
+.sending.btn-large:disabled:hover, .sending.btn-flat:disabled:hover,
+.sending.btn[disabled]:hover, [disabled].sending.btn-large:hover, .sending.btn-floating[disabled]:hover,
+.sending.btn-large[disabled]:hover, .sending.btn-flat[disabled]:hover
+.sending.btn.disabled, .sending.disabled.btn-large, .sending.btn-floating.disabled,
+.sending.btn-large.disabled, .sending.btn-flat.disabled, .sending.btn:disabled, .sending.btn-large:disabled,
+.sending.btn-floating:disabled, .sending.btn-large:disabled, .sending.btn-flat:disabled,
+.sending.btn[disabled], [disabled].btn-large.sending, .sending.btn-floating[disabled],
+.sending.btn-large[disabled], .sending.btn-flat[disabled]{
+    background-color: $secondary-color !important;
+    color: white !important;
+}

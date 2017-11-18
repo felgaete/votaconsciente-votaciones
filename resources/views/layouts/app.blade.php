@@ -9,7 +9,7 @@
     <title>@yield('title') - Votaconsciente</title>
     <!-- Styles -->
     @yield('css')
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

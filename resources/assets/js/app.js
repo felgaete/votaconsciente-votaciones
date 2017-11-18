@@ -20,7 +20,23 @@ var formatoRut = function(){
     });
 };
 
+var bloquearSubmit = function(){
+    var $form = $(this);
+    var $btn = $form.find('button[type=submit]');
+    $form.on('submit', bloquear($btn))
+};
+
+var bloquear = function($btn){
+    var sendingText = $btn.data('submit-text') || 'Sending';
+    return function(){
+        $btn.prop('disabled', true)
+            .addClass('sending')
+            .text(sendingText);
+    };
+};
+
 $(function(){
     $('.tooltipped').tooltip();
     $('.ci-field').each(formatoRut);
+    $('form.block-on-submit').each(bloquearSubmit);
 })
