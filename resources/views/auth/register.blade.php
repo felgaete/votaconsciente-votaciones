@@ -10,7 +10,8 @@
                         Registrate indicándonos tus datos. <br>
                         <small>
                             Con estos datos podemos validar tu voto y hacerlo único.<br>
-                            Los datos no serán utilizados con otro fin que no sea el estadístico.
+                            Una vez registrado te llegará un correo de confirmación para validarlo.<br>
+                            Estos datos no serán utilizados con otro fin que no sea el estadístico.
                         </small>
                     </span>
                     @if(session('confirmation-success'))
