@@ -84,7 +84,7 @@ try {
 
 var formatoRut = function formatoRut() {
     var $this = $(this);
-    $this.on('change, input', function (e) {
+    $this.on('change', function (e) {
         var val = this.value.replace(/[\.\-A-Ja-jL-Zl-z]/g, '');
         if (val.length > 1) {
             val = val.split('').reverse().join('');
