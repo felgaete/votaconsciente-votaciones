@@ -18,5 +18,5 @@ mix.js('resources/assets/js/admin.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
 if(mix.inProduction()){
-    min.version();
+    mix.version();
 }
