@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class ServelVotante implements Rule
 {
+
+    protected $message;
+
     /**
      * Create a new rule instance.
      *
@@ -38,6 +41,14 @@ class ServelVotante implements Rule
         //Primero se obtiene de la tabla votantes el rut dado
         $votante = Votante::where('ci', $value)->first();
 
+        if($votante->user_id){
+            //El votante obtenido dentro de la validacion, ya tiene un
+            //usuario asociado, lo que significa que el no tiene el rut
+            //en la tabla de usuarios esto no deberia ocurrir dentro de la aplicacion
+            //pero por seguridad se agrega
+            $this->message = 'El rut ingresado ya fue utilizado.';
+        }
+
         if(is_null($votante)){
             //Luego se busca en la tabla servel_votantes
             $votante = VotanteServel::where('ci', $value)->first();
@@ -50,6 +61,7 @@ class ServelVotante implements Rule
 
         if(is_null($votante)){
             //No se encontro ni en las cargas del sistema, ni la carga masiva
+            $this->message = 'no-vote';
             return false;
         }
         session(['validation.votante' => $votante]);
@@ -64,6 +76,6 @@ class ServelVotante implements Rule
      */
     public function message()
     {
-        return 'no-vote';
+        return $this->message;
     }
 }
