@@ -7,6 +7,9 @@ use Illuminate\Support\Str;
 
 class Rut implements Rule
 {
+
+    protected $reason;
+
     /**
      * Create a new rule instance.
      *
@@ -30,6 +33,7 @@ class Rut implements Rule
             return true;
         }
         if(!preg_match("/^(\d{1,3})(\.\d{3})*\-[\d|k|K]$/", $value)){
+            $this->reason = 'format';
             return false;
         }
 
@@ -37,6 +41,7 @@ class Rut implements Rule
             $value = str_replace('.', '', $value);
             $d = preg_split('/\-/', $value);
             if(count($d) !== 2){
+                $this->reason = 'format';
                 return false;
             }
             $rut = $d[0];
@@ -59,9 +64,15 @@ class Rut implements Rule
             }else{
                 $dvr = (string)$dvr;
             }
+
+            if(strtoupper($dv) !== $dvr){
+                $this->reason = 'invalid';
+            }
+
             return strtoupper($dv) === $dvr;
 
         }catch(\Exception $e){
+            $this->reason = 'exception';
             return false;
         }
 
@@ -74,6 +85,13 @@ class Rut implements Rule
      */
     public function message()
     {
-        return 'El rut que ingresaste no es válido. Debe ser en el formato XX.XXX.XXX-X.';
+        switch($this->reason){
+            case 'format':
+                return 'El rut que ingresaste no cumple con el formato. Debe ser de la forma XX.XXX.XXX-X.';
+            case 'invalid':
+                return 'El rut que ingresaste no es válido.';
+            default:
+                return 'No se pudo validar tu Rut.';
+        }
     }
 }
