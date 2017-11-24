@@ -11,6 +11,6 @@ class CandidaturaPolicy extends VotoPolicy
     public function votar(User $user, Candidatura $candidatura)
     {
         return $this->query($user, $candidatura->eleccion, $candidatura->territorio)
-            ->count() > 0;
+            ->count() == 0;
     }
 }

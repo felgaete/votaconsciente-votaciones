@@ -21,15 +21,16 @@ class CreateVotanteTerritorioElectoralView extends Migration
         CREATE VIEW {$this->viewName} AS
         SELECT
         	v.id AS votante_id,
+            vt.id AS voto_id,
         	te.eleccion_id AS eleccion_id,
         	te.territorio_id AS territorio_id
         FROM
         	votantes v
-        INNER JOIN circunscripcion_territorio ct ON ct.circunscripcion_id = v.circunscripcion_id
-        INNER JOIN territorio_electoral te ON te.territorio_id = ct.territorio_id
-        LEFT JOIN votos vt ON v.id = vt.votante_id
-        LEFT JOIN candidaturas c ON c.id = vt.candidatura_id AND c.territorio_id = te.territorio_id AND c.eleccion_id = te.eleccion_id
-        WHERE vt.id IS NULL
+		INNER JOIN circunscripciones cc ON cc.id = v.circunscripcion_id
+		INNER JOIN circunscripcion_territorio ct ON ct.circunscripcion_id = cc.id
+        INNER JOIN votos vt ON v.id = vt.votante_id
+        INNER JOIN candidaturas c ON c.id = vt.candidatura_id
+        INNER JOIN territorio_electoral te ON te.eleccion_id = c.eleccion_id AND te.territorio_id = c.territorio_id AND te.territorio_id = ct.territorio_id
 VIEW;
 
         DB::unprepared($sql);
